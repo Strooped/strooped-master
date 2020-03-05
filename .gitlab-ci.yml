@@ -1,0 +1,74 @@
+
+variables:
+  KUBE_NAMESPACE: ''
+  NODE_ENV: 'production'
+
+stages:
+  - install
+  - test
+  - dependency_check
+  - package
+  - build
+  - post-build
+  - review
+  - sonarcloud
+  - staging
+  - production
+
+install:
+  stage: install
+  image: node:12.10.0
+  script:
+    - npm install
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - node_modules
+
+ESLint:
+  stage: test
+  image: node:12.10.0
+  script:
+    - npm run lint:js
+
+Stylelint:
+  stage: test
+  image: node:12.10.0
+  script:
+    - npm run lint:styles
+
+Tests:
+  variables:
+    NODE_ENV: testing
+  stage: test
+  image: node:12.10.0
+  script:
+    - npm run test:coverage
+  coverage: /All files\s*\|\s*([\d\.]+)/
+  artifacts:
+    paths:
+      - coverage/
+
+Package Code:
+  variables:
+    NODE_ENV: production
+  stage: package
+  image: node:12.10.0
+  script:
+    - npm run build:prod
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist/
+
+Dependency check:
+  stage: post-build
+  image: node:12.10.0
+  script:
+    - npm audit
+  # Bad dependencies should not fail build,
+  # but should instead clearly show it is unhappy
+  allow_failure: true
+  only:
+    - branches
+
