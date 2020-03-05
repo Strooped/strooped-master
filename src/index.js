@@ -11,9 +11,9 @@ import App from './App';
 import configureStore from './state/configureStore';
 // eslint-disable-next-line import/no-named-as-default
 import OuterErrorBoundary from './components/OuterErrorBoundary';
-import { registerReactAxe } from './util/accessibilityUtil';
+import { registerReactAxe } from './utils/accessibilityUtil';
 
-import './style/globals.scss';
+import './styles/globals.scss';
 
 
 const { store } = configureStore();
