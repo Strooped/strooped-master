@@ -1,7 +1,6 @@
 
 variables:
   KUBE_NAMESPACE: ''
-  NODE_ENV: 'production'
 
 stages:
   - install
