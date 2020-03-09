@@ -1,0 +1,2 @@
+# strooped-master
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a79073d217054dc8b66de4b1a3e7c65f)](https://app.codacy.com/gh/Strooped/strooped-master?utm_source=github.com&utm_medium=referral&utm_content=Strooped/strooped-master&utm_campaign=Badge_Grade_Dashboard)
