@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegisterGameForm/> should render with game modes provided 1`] = `
+<form>
+  <div
+    class="field"
+  >
+    <label
+      class="label"
+      for="select-mode"
+    >
+      Game mode
+    </label>
+    <div
+      class="control"
+    >
+      <div
+        class="select is-fullwidth"
+      >
+        <select
+          id="select-mode"
+          name="mode"
+          required=""
+        >
+          <option
+            disabled=""
+            value=""
+          >
+            No game selected
+          </option>
+          <option
+            selected=""
+            value="1"
+          >
+            Mode 1
+          </option>
+          <option
+            value="2"
+          >
+            Mode 2
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div
+    class="field"
+  >
+    <label
+      class="label"
+      for="input-name"
+    >
+      Name of game
+    </label>
+    <div
+      class="control"
+    >
+      <input
+        class="input"
+        id="input-name"
+        name="name"
+        placeholder="Super game"
+        required=""
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    class="field is-grouped"
+  >
+    <button
+      class="button is-link is-fullwidth"
+      type="submit"
+    >
+      Create game
+    </button>
+  </div>
+</form>
+`;
