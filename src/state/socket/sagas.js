@@ -1,4 +1,4 @@
-import { put, takeLatest, call } from '@redux-saga/core/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { SOCKET_CONNECT_FAILURE, SOCKET_CONNECT_REQUESTED, SOCKET_CONNECT_SUCCESS } from './action';
 import { connectToSocket } from '../../utils/socket';
 
@@ -6,6 +6,7 @@ const SOCKET_IO_HOST = 'http://localhost:3002';
 
 let activeSocket = null;
 
+// eslint-disable-next-line require-yield
 function* listenOnSocketEvents(socket) {
   if (!socket) {
     throw new ReferenceError('Client has no active connection to server');
@@ -18,15 +19,14 @@ function* listenOnSocketEvents(socket) {
 }
 
 function* handleSocketConnection(action) {
+  const { query } = action.payload;
   console.info(`Connecting to soket on host: ${SOCKET_IO_HOST}`);
 
   try {
     activeSocket = yield call(
       connectToSocket,
       SOCKET_IO_HOST,
-      {
-        query: { token: '223455' },
-      },
+      { query },
     );
 
     console.info('Socket successfully connected');

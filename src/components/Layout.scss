@@ -1,0 +1,13 @@
+
+.pagecontent {
+  box-sizing: border-box;
+  padding: 0.5rem 0;
+
+  &.is-centered {
+    max-width: 50rem;
+    margin: 0 auto;
+
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
