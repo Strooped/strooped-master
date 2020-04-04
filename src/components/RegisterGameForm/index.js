@@ -1,4 +1,4 @@
-import { Formik } from 'formik';
+import { ErrorMessage, Formik } from 'formik';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createGameRoom } from '../../utils/api/gameRoomApi';
@@ -54,6 +54,7 @@ const RegisterGameForm = ({ onRegistered, modes }) => {
         <option value="" disabled>No game selected</option>
         {modes.map(mode => <option key={`mode-${mode.id}`} value={mode.id}>{mode.title}</option>)}
       </SelectInput>
+      <ErrorMessage name="mode" className="input-error" component="p"/>
 
       <Input
         name="name"
@@ -64,6 +65,7 @@ const RegisterGameForm = ({ onRegistered, modes }) => {
         placeholder="Super game"
         required
       />
+      <ErrorMessage name="name" className="input-error" component="p"/>
 
       <div className="field is-grouped">
         <button className="button is-link is-fullwidth" type="submit">Create game</button>
