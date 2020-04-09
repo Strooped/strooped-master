@@ -22,7 +22,7 @@ module.exports = {
   reporters: [
     'default'
   ],
-  
+
   coverageThreshold: {
     global: {
       branches: 60,
@@ -30,5 +30,8 @@ module.exports = {
       lines: 60,
       statements: 60
     },
+
+    // The test folder should not be included in the coverage counting
+    'test/**': {}
   }
 };
