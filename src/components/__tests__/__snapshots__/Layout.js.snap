@@ -1,9 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Layout/> renders with children wrapped inside 1`] = `
-<main>
-  <h1>
-    Hello world
-  </h1>
-</main>
+Array [
+  <header
+    class="navbar"
+  >
+    <span
+      class="title is-1"
+    >
+      Strooped
+    </span>
+  </header>,
+  <main
+    class="pagecontent"
+  >
+    <h1>
+      Hello world
+    </h1>
+  </main>,
+]
 `;
