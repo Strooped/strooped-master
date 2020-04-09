@@ -108,3 +108,8 @@ export const testChangedState = (reducer, action, expectedState, oldState = null
  * @return {array} List of numbers
  * */
 export const numberRange = (from, to) => Array(to).fill(from).map((x, y) => x + y);
+
+export const updateFormField = (element, { name, value }) => {
+  element.simulate('change', { persist: () => {}, target: { name, value } });
+  element.simulate('blur', { persist: () => {}, target: { name, value } });
+};
