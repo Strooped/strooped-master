@@ -1,3 +1,5 @@
+import { act } from 'react-dom/test-utils';
+
 export function mockDate() {
   return new Date(Date.UTC(2019, 2, 25, 0 , -new Date().getTimezoneOffset(), 0, 0)).valueOf();
 }
@@ -109,7 +111,17 @@ export const testChangedState = (reducer, action, expectedState, oldState = null
  * */
 export const numberRange = (from, to) => Array(to).fill(from).map((x, y) => x + y);
 
-export const updateFormField = (element, { name, value }) => {
-  element.simulate('change', { persist: () => {}, target: { name, value } });
-  element.simulate('blur', { persist: () => {}, target: { name, value } });
+export const updateFormField = async (element, { name, value }) => {
+  await act(async () => {
+    element.simulate('change', { persist: () => {}, target: { name, value } });
+  });
+  await act(async () => {
+    element.simulate('blur', { persist: () => {}, target: { name, value } });
+  });
+};
+
+export const submitForm = async (form, ...evtParams) => {
+  await act(async () => {
+    form.simulate('submit', { preventDefault: () => {}, ...evtParams });
+  });
 };
