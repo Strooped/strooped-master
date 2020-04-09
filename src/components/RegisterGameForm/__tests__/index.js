@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, mount } from 'enzyme';
-import { updateFormField, wait } from '../../../../test/util';
+import { submitForm, updateFormField } from '../../../../test/util';
 import RegisterGameForm from '../index';
 
 jest.mock('../../../utils/api/gameRoomApi');
 
 describe('<RegisterGameForm/>', () => {
-  // Used to silence annoying useLayoutEffect complaint from React
-  jest.spyOn(console, 'error').mockImplementation();
-
   it('should render with game modes provided', () => {
+    // Used to silence annoying useLayoutEffect complaint from React
+    jest.spyOn(console, 'error').mockImplementation();
+
     const wrapper = render(<RegisterGameForm
       modes={[
         {
@@ -43,13 +43,10 @@ describe('<RegisterGameForm/>', () => {
       onRegistered={onRegisteredSpy}
     />);
 
-    updateFormField(wrapper.find('input[name="name"]'), { name: 'name', value: 'Some game' });
-    updateFormField(wrapper.find('input[name="name"]'), { name: 'mode', value: '2' });
+    await updateFormField(wrapper.find('input[name="name"]'), { name: 'name', value: 'Some game' });
+    await updateFormField(wrapper.find('input[name="name"]'), { name: 'mode', value: '2' });
 
-    wrapper.find('form').simulate('submit', { preventDefault: () => {} });
-
-    // Form submittion includes async actions
-    await wait(1);
+    await submitForm(wrapper.find('form'));
 
     expect(onRegisteredSpy).toHaveBeenCalled();
   });
