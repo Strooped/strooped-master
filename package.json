@@ -30,7 +30,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
-    "@sentry/browser": "^5.14.0",
+    "@sentry/browser": "^5.14.2",
     "autoprefixer": "^9.6.1",
     "base64url": "^3.0.1",
     "bulma": "^0.8.0",
