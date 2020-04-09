@@ -11,6 +11,7 @@ module.exports = {
     "react-hooks"
   ],
   "rules": {
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-uses-vars": [
