@@ -1,0 +1,56 @@
+
+.taskviewlayout {
+  align-items: stretch;
+
+  background-color: #993669;
+
+  color: #fff;
+  box-sizing: border-box;
+
+  display: flex;
+
+  justify-content: flex-start;
+
+  height: 100vh;
+
+  width: 100%;
+
+  padding: 2em 0;
+
+  &__metadata {
+    align-items: stretch;
+    box-sizing: border-box;
+
+    display: flex;
+
+    flex: 0;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-basis: 20em;
+
+    justify-content: flex-start;
+
+    max-width: 20em;
+
+    width: 100%;
+
+    padding: 1em 2em;
+  }
+
+  &__task {
+    align-items: stretch;
+    flex: 8;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    padding: 1em 2em;
+
+    .taskwhiteboard {
+      flex: 1;
+    }
+  }
+}

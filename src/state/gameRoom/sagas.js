@@ -6,6 +6,68 @@ import {
 import { SOCKET_CONNECT_FAILURE, SOCKET_CONNECT_SUCCESS, connectToSocket } from '../socket/action';
 import { GAME_ROOM_CONNECT_FAILURE, GAME_ROOM_CONNECT_REQUESTED, GAME_ROOM_CONNECT_SUCCESS } from './action';
 
+const MOCKED_ROUNDS = [
+  {
+    id: '292993dd',
+    tasks: [
+      {
+        id: '22edd',
+        type: 'COLOR',
+        buttons: ['#FFD700', '#FF4500', '#F08080', '#AFEEEE'],
+        correctAnswer: '#FFD700',
+      },
+      {
+        id: 'weofofwfd',
+        type: 'COLOR',
+        buttons: ['#40E0D0', '#7FFFD4', '#ADD8E6', '#FAEBD7'],
+        correctAnswer: '#7FFFD4',
+      },
+      {
+        id: '3r23r2',
+        type: 'COLOR',
+        buttons: ['#778899', '#7B68EE', '#F08080', '#AFEEEE'],
+        correctAnswer: '#778899',
+      },
+      {
+        id: 'egeg233',
+        type: 'COLOR',
+        buttons: ['#FFD700', '#FF4500', '#FFD700', '#EE82EE'],
+        correctAnswer: '#EE82EE',
+      },
+    ],
+  },
+  {
+    id: '444jjjddd9',
+    tasks: [
+      {
+        id: 'oogeioi',
+        type: 'COLOR',
+        buttons: ['#FFD700', '#FF4500', '#F08080', '#AFEEEE'],
+        correctAnswer: '#FFD700',
+      },
+      {
+        id: 'weofofwfd',
+        type: 'COLOR',
+        buttons: ['#40E0D0', '#7FFFD4', '#ADD8E6', '#FAEBD7'],
+        correctAnswer: '#7FFFD4',
+      },
+      {
+        id: 'ss2222',
+        type: 'COLOR',
+        buttons: ['#778899', '#7B68EE', '#F08080', '#AFEEEE'],
+        correctAnswer: '#778899',
+      },
+      {
+        id: 'ss222',
+        type: 'COLOR',
+        buttons: ['#FFD700', '#FF4500', '#FFD700', '#EE82EE'],
+        correctAnswer: '#EE82EE',
+      },
+    ],
+  },
+];
+
+
 function* joinGameRoom(action) {
   const { joinPin } = action.payload;
   try {
@@ -27,6 +89,7 @@ function* joinGameRoom(action) {
         gameMode: '1',
         name: 'Some name',
         roomId: 'test123123123',
+        rounds: MOCKED_ROUNDS,
       },
     });
   } catch (error) {

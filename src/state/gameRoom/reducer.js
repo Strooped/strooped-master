@@ -9,6 +9,7 @@ const initialState = {
     name: null,
     gameMode: null,
     roomId: null,
+    rounds: [],
   },
   error: null,
   joinPin: null,
