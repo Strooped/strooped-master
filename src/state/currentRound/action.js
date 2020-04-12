@@ -1,3 +1,4 @@
+import { emitMessage } from '../socket/action';
 
 export const CURRENT_TASK_UPDATE_REQUESTED = 'CURRENT_TASK_UPDATE_REQUESTED';
 export const CURRENT_TASK_UPDATE_SUCCESS = 'CURRENT_TASK_UPDATE_SUCCESS';
@@ -14,3 +15,7 @@ export const updateCurrentRound = ({ round }) => ({
   type: CURRENT_ROUND_UPDATE,
   payload: round,
 });
+
+export const notifyTaskTimeout = task => emitMessage('task:end', task);
+export const notifyPlayersOfNewTask = task => emitMessage('task:start', task);
+export const notifyPlayersOfRoundEnd = roundId => emitMessage('round:end', { roundId });

@@ -31,6 +31,5 @@ export const getColorQuestion = async (correctColor) => {
 
   const { name } = takeRandomItem(allOtherColors);
 
-  console.info(`Correct color is ${name} (hex: ${correctColor}), shown color is ${color}`);
   return { name, color };
 };

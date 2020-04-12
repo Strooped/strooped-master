@@ -1,17 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import CountdownTimer from '../components/CountdownTimer';
 import TaskViewLayout from '../components/TaskViewLayout';
 import TaskWhiteBoard from '../components/TaskViewLayout/TaskWhiteBoard';
 import useGameRoom from '../hooks/useGameRoom';
 import useLiveTimer from '../hooks/useLiveTimer';
+import { notifyTaskTimeout } from '../state/currentRound/action';
 
 const TIME_TO_ANSWER_DURATION_SECONDS = 3000;
 
 const CurrentTaskPage = () => {
+  useGameRoom();
+
   const pageTitle = 'What color is this?';
-  useGameRoom({ joinPin: '699395' });
+
+  const dispatch = useDispatch();
   const { currentTask, round } = useSelector(state => state.currentRound);
 
   const liveTimer = useLiveTimer({
@@ -25,6 +29,7 @@ const CurrentTaskPage = () => {
   }
 
   if (liveTimer.isCompleted) {
+    dispatch(notifyTaskTimeout(currentTask));
     return <Redirect to="/round/task/"/>;
   }
 

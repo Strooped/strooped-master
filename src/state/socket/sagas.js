@@ -1,4 +1,10 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
+import {
+  put,
+  takeLatest,
+  takeEvery,
+  call,
+  select,
+} from 'redux-saga/effects';
 import { SOCKET_CONNECT_FAILURE, SOCKET_CONNECT_REQUESTED, SOCKET_CONNECT_SUCCESS } from './action';
 import { connectToSocket } from '../../utils/socket';
 
@@ -48,6 +54,24 @@ function* handleSocketConnection(action) {
   }
 }
 
+function* emitMessageToSocket(action) {
+  console.info('%c Sending message to socket...', 'color: #993669');
+  console.info(action);
+
+  const { name, payload } = action.payload;
+
+  const { connection: socket, isConnected } = yield select(state => state.socket.socket);
+
+  if (!isConnected) {
+    console.error('No connection to socket yet. Could not send message');
+    console.info(action);
+    return;
+  }
+
+  socket.emit(name, payload);
+}
+
 export default function* watchSocketConnection() {
   yield takeLatest(SOCKET_CONNECT_REQUESTED, handleSocketConnection);
+  yield takeEvery(action => action.type.startsWith('SOCKET_EMIT_'), emitMessageToSocket);
 }

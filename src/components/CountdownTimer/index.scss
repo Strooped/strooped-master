@@ -1,11 +1,11 @@
 @import '../../styles/variables';
 
 .countdowntimer {
-  background-color: #fff;
+  background-color: $primary-light-background;
   box-sizing: border-box;
   border-radius: 100px;
 
-  color: $deep-green;
+  color: $text-dark;
 
   font-size: 1.5em;
   font-style: normal;

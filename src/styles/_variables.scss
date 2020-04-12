@@ -1,9 +1,24 @@
+
+// Define a collection of colors
+$light-blue: #268c99;
+$deep-green: #17464d;
+$light-grass: #379936;
+
+$white-ghost: #f8f8ff;
+$white-snow: #fffafa;
+$linen: #faf0e6;
+$light-slate-gray: #789;
+$dark-grey: #333;
+$charcoal: #212121;
+
+// Define in which context a color should be used
 $deep-blue: blue;
 $text-color: #212121;
 
 $error-color: #f47878;
 
 $primary-background: #993669;
-$light-blue: #268c99;
-$deep-green: #17464d;
-$light-grass: #379936;
+$primary-light-background: $white-ghost;
+
+$text-light: $white-snow;
+$text-dark: $dark-grey;

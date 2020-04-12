@@ -9,19 +9,27 @@ import { joinGameRoom } from '../state/gameRoom/action';
  * It returns the gameRoom,
  * with metadata such as isLoading and error.
  * */
-const useGameRoom = ({ joinPin }) => {
+const useGameRoom = ({ joinPin } = {}) => {
   const dispatch = useDispatch();
   const {
     room,
     error,
     isLoading,
-    joinPin: storedJoinPin,
   } = useSelector(state => state.gameRoom);
 
+  const storedJoinPin = room.joinPin;
+
   useEffect(() => {
-    if (!joinPin) {
+    // In cases where we have no means of connecting to a game
+    if (!joinPin && !storedJoinPin) {
+      console.info(room);
       // eslint-disable-next-line no-console
       console.debug('No joinPin provided, skipping connection...');
+      return;
+    }
+
+    // Do nothing more if we are loading our current action
+    if (isLoading) {
       return;
     }
 

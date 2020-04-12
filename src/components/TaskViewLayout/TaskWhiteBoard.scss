@@ -1,7 +1,8 @@
+@import '../../styles/variables';
 
 .taskwhiteboard {
   align-items: center;
-  background-color: #fafafa;
+  background-color: $primary-light-background;
   border: #eee solid 1px;
   box-sizing: border-box;
 
