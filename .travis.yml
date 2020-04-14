@@ -28,3 +28,6 @@ jobs:
       - docker build -t $CONTAINER_NAME .
       - docker images
       - docker push $CONTAINER_NAME
+
+# before_install...gs
+# openssl aes-256-cbc -K $encrypted_b2c29de587db_key -iv $encrypted_b2c29de587db_iv -in deploy_key.enc -out deploy_key -d
