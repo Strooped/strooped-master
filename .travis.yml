@@ -6,7 +6,18 @@ node_js:
 env:
   global:
   - KUBECONFIG="/etc/deploy/config"
-  - CONTAINER_NAME="strooped/strooped-master:${TRAVIS_COMMIT}"
+  - CI_DOCKER_IMAGE="strooped/strooped-master:${TRAVIS_COMMIT}"
+  - KUBE_NAMESPACE="strooped"
+  - CI_PROJECT_NAME="strooped-master"
+  - CI_KUBE_FILE="strooped-master.yml"
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_b2c29de587db_key -iv $encrypted_b2c29de587db_iv -in deploy_key.enc -out deploy_key -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 deploy_key
+  - ssh-add deploy_key
+  - ssh-keyscan lokalvert.tech >> ~/.ssh/known_hosts
+
 jobs:
   include:
   - stage: Quality
@@ -16,8 +27,6 @@ jobs:
   - stage: Test
     name: Unit-test
     script: npm run test:coverage
-  - stage: Dependency Audit
-    script: npm audit || true
     # Our cluster runs on raspberry PIs
   - stage: build docker image
     language: bash
@@ -25,9 +34,33 @@ jobs:
     arch: arm64
     script:
       - echo "$DOCKER_SECRET" | docker login -u "$DOCKER_USER" --password-stdin
-      - docker build -t $CONTAINER_NAME .
+      - docker build -t $CI_DOCKER_IMAGE .
       - docker images
-      - docker push $CONTAINER_NAME
-
-# before_install...gs
-# openssl aes-256-cbc -K $encrypted_b2c29de587db_key -iv $encrypted_b2c29de587db_iv -in deploy_key.enc -out deploy_key -d
+      - docker push $CI_DOCKER_IMAGE
+    if: branch = master
+  - stage: Deploy production
+    language: bash
+    script:
+      - sed -e "s/{{ CI_COMMIT_SHORT_SHA }}/${TRAVIS_COMMIT}/g" -e "s/{{ CI_PROJECT_NAME }}/${CI_PROJECT_NAME}/g" -e "s/{{ KUBE_NAMESPACE }}/${KUBE_NAMESPACE}/g" kubernetes/deployment.yml > bundle/$CI_KUBE_FILE
+      - rsync -r --quiet $TRAVIS_BUILD_DIR/bundle/$CI_KUBE_FILE strooped-ci@lokalvert.tech:~/$CI_KUBE_FILE
+      - ssh strooped-ci@lokalvert.tech "KUBECONFIG=/home/strooped-ci/.kube/config kubectl apply -f ~/$CI_KUBE_FILE"
+      - ssh strooped-ci@lokalvert.tech KUBECONFIG=/home/strooped-ci/.kube/config kubectl rollout status -w "deployment/${CI_PROJECT_NAME}" --namespace=${KUBE_NAMESPACE}
+    if: branch = master
+    cache:
+      directories:
+        - bundle/
+#
+#deploy:
+#  - provider: script
+#    script: rsync -r --quiet $TRAVIS_BUILD_DIR/bundle/production.yml strooped-ci@lokalvert.tech:~/production.yml
+#    on:
+#      branch: "feat/deploy-to-production"
+#  - provider: script
+#    script: ssh strooped-ci@lokalvert.tech "KUBECONFIG=/home/strooped-ci/.kube/config kubectl apply -f ~/production.yml"
+#    on:
+#      branch: "feat/deploy-to-production"
+#  - provider: script
+#    # Here is the command not escaped in quotations to allow the env-variables to be passed down
+#    script: ssh strooped-ci@lokalvert.tech KUBECONFIG=/home/strooped-ci/.kube/config kubectl rollout status -w "deployment/${CI_PROJECT_NAME}-app" --namespace=${KUBE_NAMESPACE}
+#    on:
+#      branch: "feat/deploy-to-production"
