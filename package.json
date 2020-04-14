@@ -33,7 +33,7 @@
     "@sentry/browser": "^5.14.2",
     "autoprefixer": "^9.6.1",
     "base64url": "^3.0.1",
-    "bulma": "^0.8.0",
+    "bulma": "^0.8.1",
     "classnames": "^2.2.6",
     "clean-webpack-plugin": "^2.0.2",
     "core-js": "^3.2.1",
