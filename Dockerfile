@@ -1,4 +1,4 @@
-FROM node:12.13.0 as build
+FROM arm32v7/node:12.13.0 as build
 
 WORKDIR /srv/app
 
@@ -17,7 +17,7 @@ RUN npm install
 
 RUN NODE_ENV=production npm run build:prod
 
-FROM node:12.13.0-alpine as production
+FROM arm32v7/node:12.13.0-alpine as production
 
 WORKDIR /srv/app
 

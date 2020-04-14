@@ -1,6 +1,8 @@
 language: node_js
+
 node_js:
 - 12.13.0
+
 env:
   global:
   - KUBECONFIG="/etc/deploy/config"
@@ -16,7 +18,11 @@ jobs:
     script: npm run test:coverage
   - stage: Dependency Audit
     script: npm audit || true
+    # Our cluster runs on raspberry PIs
   - stage: build docker image
+    language: bash
+    os: linux
+    arch: arm64
     script:
       - echo "$DOCKER_SECRET" | docker login -u "$DOCKER_USER" --password-stdin
       - docker build -t $CONTAINER_NAME .
