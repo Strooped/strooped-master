@@ -4,3 +4,7 @@ node_modules
 .idea
 .vscode
 coverage
+
+*.env
+
+dist/

@@ -4,7 +4,7 @@ node_js:
 env:
   global:
   - KUBECONFIG="/etc/deploy/config"
-  - CONTAINER_NAME="lokalvert.tech/${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}"
+  - CONTAINER_NAME="strooped/strooped-master:${TRAVIS_COMMIT}"
 jobs:
   include:
   - stage: Quality
@@ -16,3 +16,9 @@ jobs:
     script: npm run test:coverage
   - stage: Dependency Audit
     script: npm audit || true
+  - stage: build docker image
+    script:
+      - echo "$DOCKER_SECRET" | docker login -u "$DOCKER_USER" --password-stdin
+      - docker build -t $CONTAINER_NAME .
+      - docker images
+      - docker push $CONTAINER_NAME
