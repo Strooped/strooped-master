@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Layout = ({ children }) => <main>
-  {children}
+  <div className="stropped-screen__container">
+      {children}
+  </div>
 </main>;
 
 Layout.propTypes = {
