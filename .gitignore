@@ -4,4 +4,12 @@ node_modules
 .idea
 .vscode
 coverage
+<<<<<<< HEAD
+
+*.env
+
+dist/
+bundle/
 deploy_key
+
+kubernetes-production.yml
