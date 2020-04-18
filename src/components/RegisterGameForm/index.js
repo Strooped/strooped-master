@@ -10,7 +10,7 @@ const isModeInModes = (modeId, modes) => !!modes
 
 const RegisterGameForm = ({ onRegistered, modes }) => {
   const submitGameRoom = (values) => {
-    createGameRoom(values)
+    createGameRoom(parseInt(values.mode, 10))
       .then(room => onRegistered(room))
       .catch(err => console.error('Failed to create game-room', err));
   };
