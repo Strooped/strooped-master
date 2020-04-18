@@ -10,6 +10,7 @@ env:
   - KUBE_NAMESPACE="strooped"
   - CI_PROJECT_NAME="strooped-master"
   - CI_KUBE_FILE="strooped-master.yml"
+  - STROOPED_API_HOST="strooped-api.lokalvert.tech"
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_b2c29de587db_key -iv $encrypted_b2c29de587db_iv -in deploy_key.enc -out deploy_key -d
@@ -34,7 +35,7 @@ jobs:
     arch: arm64
     script:
       - echo "$DOCKER_SECRET" | docker login -u "$DOCKER_USER" --password-stdin
-      - docker build -t $CI_DOCKER_IMAGE .
+      - docker build --build-arg STROOPED_API_HOST=$STROOPED_API_HOST -t $CI_DOCKER_IMAGE .
       - docker images
       - docker push $CI_DOCKER_IMAGE
     if: branch = master
