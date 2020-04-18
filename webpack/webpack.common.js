@@ -131,6 +131,7 @@ const config = {
       DEBUG: false,
       SENTRY_DSN: '',
       RELEASE_VERSION: getReleaseVersion(),
+      STROOPED_API_HOST: 'http://localhost:3001',
     }),
     new webpack.DefinePlugin({
       API_HOST: JSON.stringify(process.env.API_HOST),

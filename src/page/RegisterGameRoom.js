@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 import Layout from '../components/Layout';
 import RegisterGameForm from '../components/RegisterGameForm';
 import useGameRoom from '../hooks/useGameRoom';
@@ -7,27 +8,27 @@ import { listGameModes } from '../state/gameMode/action';
 
 const RegisterGameRoom = () => {
   const pageTitle = 'Start a new game';
-  const [joinPin, setJoinPin] = useState(null);
+  const [gameRoom, setGameRoom] = useState(null);
   const dispatch = useDispatch();
   const { modes = [], error: gameModeError } = useSelector(state => state.gameMode);
 
-  const gameRoom = useGameRoom({ joinPin });
+  const loadedGameRoom = useGameRoom({
+    joinPin: gameRoom?.joinPin,
+    roomId: gameRoom?.id,
+  });
 
   useEffect(() => {
     dispatch(listGameModes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-  if (gameRoom.room.roomId) {
-    if (!joinPin) {
+  if (loadedGameRoom?.room?.id) {
+    if (!gameRoom?.joinPin) {
       console.warn('User is already connected to a room. Redirecting to lobby...');
     }
 
     // Replace with actual redirect when lobby is available
-    return <div>
-      Redirect placeholder...
-    </div>;
+    return <Redirect to="/round/"/>;
   }
 
   return <Layout pageTitle={pageTitle} type="centered">
@@ -38,7 +39,7 @@ const RegisterGameRoom = () => {
       <p>{gameModeError.message}</p>
     </section>}
 
-    <RegisterGameForm onRegistered={room => setJoinPin(room.joinPin)} modes={modes}/>
+    <RegisterGameForm onRegistered={room => setGameRoom(room)} modes={modes}/>
   </Layout>;
 };
 

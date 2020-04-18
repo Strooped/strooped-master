@@ -11,7 +11,7 @@ const getNextRound = (rounds, currentRound) => {
     return rounds[0];
   }
 
-  const currentRoundIndex = rounds.find(round => round.id === currentRound.id);
+  const currentRoundIndex = rounds.findIndex(round => round.id === currentRound.id);
 
   if (currentRoundIndex >= rounds.length) {
     return null;
@@ -33,19 +33,20 @@ const getRequestedRoundId = (location) => {
  * */
 const LoadRoundPage = ({ location }) => {
   const dispatch = useDispatch();
-  const gameRoom = useGameRoom({ joinPin: '699395' });
+  const gameRoom = useGameRoom();
   const currentRound = useSelector(state => state.currentRound);
 
   const [redirectTo, setRedirectTo] = useState(null);
 
   const requestedRoundId = getRequestedRoundId(location);
 
+  const rounds = gameRoom?.room?.gameMode?.rounds ?? [];
+
   useEffect(() => {
-    if (!gameRoom.room.rounds || gameRoom.room.rounds.length < 1) {
+    if (rounds.length < 1) {
       return;
     }
 
-    const { rounds } = gameRoom.room;
     const { round } = currentRound;
 
     let nextRound = requestedRoundId
@@ -69,7 +70,7 @@ const LoadRoundPage = ({ location }) => {
     dispatch(updateCurrentRound({ round: nextRound }));
     setRedirectTo('/round/task/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameRoom.room.rounds.length]);
+  }, [rounds.length]);
 
   if (redirectTo) {
     return <Redirect to={redirectTo}/>;

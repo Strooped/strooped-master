@@ -9,10 +9,10 @@ import { joinGameRoom } from '../state/gameRoom/action';
  * It returns the gameRoom,
  * with metadata such as isLoading and error.
  * */
-const useGameRoom = ({ joinPin } = {}) => {
+const useGameRoom = ({ joinPin, roomId = null } = {}) => {
   const dispatch = useDispatch();
   const {
-    room,
+    room = {},
     error,
     isLoading,
   } = useSelector(state => state.gameRoom);
@@ -44,7 +44,7 @@ const useGameRoom = ({ joinPin } = {}) => {
       console.warn(`Client is connected to another gameRoom (connectedPin: ${storedJoinPin}, expectedPin: ${joinPin}`);
     }
 
-    dispatch(joinGameRoom(joinPin));
+    dispatch(joinGameRoom({ joinPin, roomId }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinPin]);
 
