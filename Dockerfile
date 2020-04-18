@@ -1,5 +1,7 @@
 FROM arm32v7/node:12.13.0 as build
 
+ARG STROOPED_API_HOST
+
 WORKDIR /srv/app
 
 COPY ./src/ ./src/
