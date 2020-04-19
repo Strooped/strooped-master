@@ -28,7 +28,7 @@ const RegisterGameRoom = () => {
     }
 
     // Replace with actual redirect when lobby is available
-    return <Redirect to="/round/"/>;
+    return <Redirect to="/lobby/"/>;
   }
 
   return <Layout pageTitle={pageTitle} type="centered">
