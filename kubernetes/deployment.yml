@@ -31,7 +31,7 @@ spec:
             httpGet:
               path: /favicon.ico
               port: 3000
-            initialDelaySeconds: 60
+            initialDelaySeconds: 30
             timeoutSeconds: 5
           # Tells it whether or not the application should be restarted or not. ex. from deadlock
           livenessProbe:
