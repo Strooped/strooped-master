@@ -15,7 +15,7 @@ const PinPresenter = ({ pin }) => <div>
 </div>;
 
 PinPresenter.propTypes = {
-  pin: PropTypes.number,
+  pin: PropTypes.string,
 };
 
 export default PinPresenter;

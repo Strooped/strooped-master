@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../components/Layout';
 import RegisterGameForm from '../components/RegisterGameForm';
@@ -25,9 +26,7 @@ const RegisterGameRoom = () => {
     }
 
     // Replace with actual redirect when lobby is available
-    return <div>
-      Redirect placeholder...
-    </div>;
+    return <Redirect to={'/lobby'} />;
   }
 
   return <Layout pageTitle={pageTitle} type="centered">

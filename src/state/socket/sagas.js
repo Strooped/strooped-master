@@ -7,6 +7,7 @@ import {
 } from 'redux-saga/effects';
 import { SOCKET_CONNECT_FAILURE, SOCKET_CONNECT_REQUESTED, SOCKET_CONNECT_SUCCESS } from './action';
 import { connectToSocket } from '../../utils/socket';
+import { updatePlayerList } from '../player/action';
 
 const SOCKET_IO_HOST = 'http://localhost:3002';
 
@@ -18,9 +19,10 @@ function* listenOnSocketEvents(socket) {
     throw new ReferenceError('Client has no active connection to server');
   }
 
-  socket.on('game:start', (message) => {
+  socket.on('player:joined', (message) => {
     console.info('Received message from client');
     console.info(message);
+    put(updatePlayerList(message));
   });
 }
 

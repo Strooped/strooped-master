@@ -1,0 +1,11 @@
+.player-list {
+  color: #ffc30f;
+  font-size: 36px;
+  display: flex;
+  flex-flow: wrap column;
+  max-height: 250px;
+
+  li {
+    padding: 0 10px;
+  }
+}
