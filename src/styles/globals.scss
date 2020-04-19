@@ -64,19 +64,16 @@ h2 {
   font-family: sans-serif;
 }
 
-.player-list {
-  color: #ffc30f;
-  font-size: 36px;
-  display: flex;
-  flex-flow: wrap column;
-  max-height: 250px;
-
-  li {
-    padding: 0 10px;
-  }
-}
-
 .player-list-header__wrapper {
   font-size: 48px;
   color: white;
+}
+
+.input-error {
+  color: $error-color;
+  margin: 0 0 0.2rem 0;
+}
+
+.has-upper-auto-margin {
+  margin-top: auto;
 }

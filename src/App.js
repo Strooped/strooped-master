@@ -1,39 +1,20 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import Layout from './components/Layout';
-import PinPresenter from './components/PinPresenter';
-import Button from './components/Button';
-import ListPlayers from './components/ListPlayers';
-
-const players = [
-  'fredrik',
-  'didrik',
-  'ingrid',
-  'erik',
-  'håvard',
-  'mikkel',
-  'bfgf',
-  'gfdgf',
-];
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import CurrentTaskPage from './page/CurrentTaskPage';
+import LoadRoundPage from './page/LoadRoundPage';
+import LoadTaskPage from './page/LoadTaskPage';
+import RegisterGameRoom from './page/RegisterGameRoom';
+import GameLobby from './page/GameLobby';
 
 // Suspense is used by react-i18next when translations are not ready
 const App = () => <BrowserRouter>
-    <Layout>
-      <div className="lobby__container">
-        <div className="lobby__content">
-          <div className="lobby-main__content">
-            <PinPresenter pin={4343435}/>
-            <div className="player-list__container">
-              <div className="player-list-header__wrapper">
-                <span>Joined</span>
-              </div>
-              <ListPlayers players={players}/>
-            </div>
-          </div>
-          <Button text="Start Game" />
-        </div>
-      </div>
-    </Layout>
+  <Switch>
+    <Route exact path="/" component={RegisterGameRoom}/>
+    <Route exact path="/round/task/:taskId" component={CurrentTaskPage}/>
+    <Route exact path="/round/task" component={LoadTaskPage}/>
+    <Route exact path="/round/" component={LoadRoundPage}/>
+    <Route exact path="/lobby/" component={GameLobby} />
+  </Switch>
 </BrowserRouter>;
 
 export default App;

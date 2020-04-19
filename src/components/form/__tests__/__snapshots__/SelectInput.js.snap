@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SelectInput/> should render all options 1`] = `
+<div
+  class="field"
+>
+  <label
+    class="label"
+    for="select-name"
+  >
+    Some label
+  </label>
+  <div
+    class="control"
+  >
+    <div
+      class="select is-fullwidth"
+    >
+      <select
+        id="select-name"
+        name="name"
+      >
+        <option
+          disabled=""
+          value="1"
+        >
+          Disabled option
+        </option>
+        <option
+          value="2"
+        >
+          Some option
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+`;

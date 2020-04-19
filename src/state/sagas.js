@@ -1,9 +1,15 @@
 import { all } from 'redux-saga/effects';
-import watchGameRoomCreation from './gameRoom/sagas';
+import watchGameRoomJoin from './gameRoom/sagas';
+import watchSocketConnection from './socket/sagas';
+import watchGameModeList from './gameMode/sagas';
+import watchTaskChange from './currentRound/sagas';
 
 function* rootSaga() {
   yield all([
-    watchGameRoomCreation(),
+    watchGameRoomJoin(),
+    watchSocketConnection(),
+    watchGameModeList(),
+    watchTaskChange(),
   ]);
 }
 

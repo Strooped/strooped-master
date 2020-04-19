@@ -1,15 +1,9 @@
 
-export const CREATE_GAME_ROOM_REQUESTED = 'CREATE_GAME_ROOM_REQUESTED';
-export const CREATE_GAME_ROOM_SUCCESS = 'CREATE_GAME_ROOM_SUCCESS';
-export const CREATE_GAME_ROOM_FAILURE = 'CREATE_GAME_ROOM_FAILURE';
+export const GAME_ROOM_CONNECT_REQUESTED = 'GAME_ROOM_CONNECT_REQUESTED';
+export const GAME_ROOM_CONNECT_SUCCESS = 'GAME_ROOM_CONNECT_SUCCESS';
+export const GAME_ROOM_CONNECT_FAILURE = 'GAME_ROOM_CONNECT_FAILURE';
 
-export const LIST_GAME_MODES_REQUESTED = 'LIST_GAME_MODES_REQUESTED';
-export const LIST_GAME_MODES_SUCCESS = 'LIST_GAME_MODES_SUCCESS';
-export const LIST_GAME_MODES_FAILURE = 'LIST_GAME_MODES_FAILURE';
-
-export const createGameRoom = (name, mode) => ({
-  type: CREATE_GAME_ROOM_REQUESTED,
-  payload: { name, mode },
+export const joinGameRoom = joinPin => ({
+  type: GAME_ROOM_CONNECT_REQUESTED,
+  payload: { joinPin },
 });
-
-export const listGameModes = () => ({ type: LIST_GAME_MODES_REQUESTED });
