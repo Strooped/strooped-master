@@ -1,6 +1,6 @@
 let cachedColors = null;
 
-const fetchAllColors = () => fetch('http://localhost:3001/colors.json')
+const fetchAllColors = () => fetch(`${process.env.STROOPED_API_HOST}/colors.json`)
   .then(res => res.json())
   .catch((err) => {
     console.error('Failed to retrieve list of all colors from api', err);

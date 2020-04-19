@@ -8,7 +8,7 @@ import useGameRoom from '../hooks/useGameRoom';
 import useLiveTimer from '../hooks/useLiveTimer';
 import { notifyTaskTimeout } from '../state/currentRound/action';
 
-const TIME_TO_ANSWER_DURATION_SECONDS = 3000;
+const TIME_TO_ANSWER_DURATION_SECONDS = 5000;
 
 const CurrentTaskPage = () => {
   useGameRoom();

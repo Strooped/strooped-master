@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './TaskWhiteBoard.scss';
+import { getContrastYIQ } from '../../utils/colorUtil';
 
 const ORIGINAL_ANSWER_FONT_SIZE = 10;
 
@@ -22,6 +23,12 @@ const getFontSizeReduction = (length) => {
     : 1;
 };
 
+const getBackgroundColorForTask = (taskColor) => {
+  const backgroundColors = { light: '#f8f8ff', dark: '#212121' };
+
+  return getContrastYIQ(taskColor, backgroundColors);
+};
+
 const TaskWhiteBoard = ({ colorToDisplay = null }) => {
   if (!colorToDisplay) {
     return <div className="taskwhiteboard">
@@ -32,7 +39,11 @@ const TaskWhiteBoard = ({ colorToDisplay = null }) => {
   const fontSizeReduction = getFontSizeReduction(colorToDisplay.name.length);
   const actualFontSize = ORIGINAL_ANSWER_FONT_SIZE * fontSizeReduction;
 
-  return <div className="taskwhiteboard">
+  // Determine the best background color to use on the whiteboard,
+  // for the task to be most visible
+  const backgroundColor = getBackgroundColorForTask(colorToDisplay.color);
+
+  return <div className="taskwhiteboard" style={{ backgroundColor }}>
     <strong
       className="taskwhiteboard__answer"
       style={{ color: colorToDisplay.color, fontSize: `${actualFontSize}em` }}

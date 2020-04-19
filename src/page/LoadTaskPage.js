@@ -48,7 +48,8 @@ const LoadTaskPage = ({ location }) => {
   useEffect(() => {
     // If we are not connected to the socket,
     // is there no point in continuing
-    if (!gameRoom.room || !gameRoom.room.roomId) {
+    if (!gameRoom.room || !gameRoom.room.id) {
+      console.warn('No game room present. Redirecting to homepage...');
       history.push('/');
       return;
     }

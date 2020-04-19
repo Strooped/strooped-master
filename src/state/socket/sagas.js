@@ -9,7 +9,7 @@ import { SOCKET_CONNECT_FAILURE, SOCKET_CONNECT_REQUESTED, SOCKET_CONNECT_SUCCES
 import { connectToSocket } from '../../utils/socket';
 import { updatePlayerList } from '../player/action';
 
-const SOCKET_IO_HOST = 'http://localhost:3002';
+const SOCKET_IO_HOST = process.env.STROOPED_API_HOST;
 
 let activeSocket = null;
 

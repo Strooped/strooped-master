@@ -42,3 +42,4 @@ const responseHandler = async (res) => {
 
 // eslint-disable-next-line import/prefer-default-export
 export const callGet = (uri, options = {}) => fetch(uri, options).then(responseHandler);
+export const callPost = (uri, options = {}) => fetch(uri, { ...options, method: 'post' }).then(responseHandler);
