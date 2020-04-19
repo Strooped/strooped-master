@@ -1,6 +1,6 @@
 FROM arm32v7/node:12.13.0 as build
 
-ARG STROOPED_API_HOST
+ARG STROOPED_API_HOST="https://strooped-api.lokalvert.tech"
 
 WORKDIR /srv/app
 
@@ -17,7 +17,7 @@ COPY .eslintignore .
 # Remove any source maps from dist folder
 RUN npm install
 
-RUN NODE_ENV=production npm run build:prod
+RUN NODE_ENV=production STROOPED_API_HOST=$STROOPED_API_HOST npm run build:prod
 
 FROM arm32v7/node:12.13.0-alpine as production
 

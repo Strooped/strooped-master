@@ -10,7 +10,7 @@ env:
   - KUBE_NAMESPACE="strooped"
   - CI_PROJECT_NAME="strooped-master"
   - CI_KUBE_FILE="strooped-master.yml"
-  - STROOPED_API_HOST="strooped-api.lokalvert.tech"
+  - STROOPED_API_HOST="https://strooped-api.lokalvert.tech"
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_b2c29de587db_key -iv $encrypted_b2c29de587db_iv -in deploy_key.enc -out deploy_key -d
