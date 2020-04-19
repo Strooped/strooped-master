@@ -16,6 +16,6 @@ export const updateCurrentRound = ({ round }) => ({
   payload: round,
 });
 
-export const notifyTaskTimeout = task => emitMessage('task:end', task);
+export const notifyTaskTimeout = task => emitMessage('task:ending', task);
 export const notifyPlayersOfNewTask = task => emitMessage('task:start', task);
 export const notifyPlayersOfRoundEnd = roundId => emitMessage('round:end', { roundId });
