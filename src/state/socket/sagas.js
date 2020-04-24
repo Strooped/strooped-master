@@ -39,7 +39,7 @@ function* listenOnSocketEvents(socket) {
   }
   const channel = yield call(createSocketChannel, socket);
   while (true) {
-    const player = yield take(channel);
+    const { player } = yield take(channel);
     yield put(updatePlayerList(player));
   }
 }

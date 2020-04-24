@@ -3,7 +3,6 @@ import watchGameRoomJoin from './gameRoom/sagas';
 import watchSocketConnection from './socket/sagas';
 import watchGameModeList from './gameMode/sagas';
 import watchTaskChange from './currentRound/sagas';
-import watchPlayerUpdate from './player/sagas';
 
 function* rootSaga() {
   yield all([
@@ -11,7 +10,6 @@ function* rootSaga() {
     watchSocketConnection(),
     watchGameModeList(),
     watchTaskChange(),
-    watchPlayerUpdate(),
   ]);
 }
 

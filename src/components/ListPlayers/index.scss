@@ -1,5 +1,7 @@
+@import '../../styles/variables';
+
 .player-list {
-  color: #ffc30f;
+  color: $list-color;
   font-size: 36px;
 
   li {

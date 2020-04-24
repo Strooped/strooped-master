@@ -11,14 +11,14 @@ const GameLobbyPage = () => {
   const dispatch = useDispatch();
   const gameRoom = useGameRoom();
   const joinPin = gameRoom?.room?.joinPin;
-  const { allPlayers = [], isLoading } = useSelector(state => state.players);
+  const { allPlayers = [] } = useSelector(state => state.players);
   const [redirect, setRedirect] = useState(false);
 
   if (!joinPin) {
     return <Redirect to={'/'} />;
   }
 
-  const HandleStartGame = () => {
+  const handleStartGame = () => {
     if (allPlayers.length > 1) {
       dispatch(notifyStartGame());
       setTimeout(() => setRedirect(true), 2000);
@@ -30,7 +30,7 @@ const GameLobbyPage = () => {
   }
 
   return <LobbyViewLayout>
-    <div style={{ width: '100%' }}>
+    <main>
       {joinPin && <h2 className='title is-1 has-text-white'>Game PIN</h2>}
       <code className='is-size-1'>{joinPin}</code>
       <h3
@@ -38,11 +38,11 @@ const GameLobbyPage = () => {
         className='title is-2 has-text-white has-margin-top-1'>
         Players
       </h3>
-        {!isLoading && allPlayers && <ListPlayers players={allPlayers}/>}
-    </div>
+        {allPlayers && <ListPlayers players={allPlayers}/>}
+    </main>
     <button
       className="button is-link is-fullwidth is-size-1"
-      onClick={HandleStartGame}
+      onClick={handleStartGame}
       type="button">
       Start game
     </button>
