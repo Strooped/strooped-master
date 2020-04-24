@@ -1,47 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 
-import PinPresenter from '../components/PinPresenter';
+import LobbyViewLayout from '../components/LobbyViewLayout';
 import { notifyStartGame } from '../state/player/action';
 import ListPlayers from '../components/ListPlayers';
+import useGameRoom from '../hooks/useGameRoom';
 
-const GameLobby = () => {
+const GameLobbyPage = () => {
   const dispatch = useDispatch();
-  const joinPin = '223455';
-  const { allPlayers = [] } = useSelector(state => state.players);
+  const gameRoom = useGameRoom();
+  const joinPin = gameRoom?.room?.joinPin;
+  const { allPlayers = [], isLoading } = useSelector(state => state.players);
+  const [redirect, setRedirect] = useState(false);
 
   if (!joinPin) {
     return <Redirect to={'/'} />;
   }
 
-  // eslint-disable-next-line consistent-return
   const HandleStartGame = () => {
-    if (allPlayers) {
+    if (allPlayers.length > 1) {
       dispatch(notifyStartGame());
-      // Add delay before starting
-      return <Redirect to="/round/"/>;
+      setTimeout(() => setRedirect(true), 2000);
     }
   };
+  // eslint-disable-next-line consistent-return
+  if (redirect) {
+    return <Redirect to="/round/"/>;
+  }
 
-  return (
-    <div className="stropped-screen__container">
-      <div className="lobby__container">
-        <div className="lobby__content">
-          <div className="lobby-main__content">
-            <PinPresenter pin={joinPin}/>
-            <div className="player-list__container">
-              <div className="player-list-header__wrapper">
-                <span>Players</span>
-                {allPlayers && <ListPlayers players={allPlayers}/>}
-              </div>
-            </div>
-          </div>
-          <button className="button is-link is-fullwidth" onClick={HandleStartGame} type="button">Start game</button>
-        </div>
-      </div>
+  return <LobbyViewLayout>
+    <div style={{ width: '100%' }}>
+      {joinPin && <h2 className='title is-1 has-text-white'>Game PIN</h2>}
+      <code className='is-size-1'>{joinPin}</code>
+      <h3
+        style={{ margin: '50px 0 0' }}
+        className='title is-2 has-text-white has-margin-top-1'>
+        Players
+      </h3>
+        {!isLoading && allPlayers && <ListPlayers players={allPlayers}/>}
     </div>
-  );
+    <button
+      className="button is-link is-fullwidth is-size-1"
+      onClick={HandleStartGame}
+      type="button">
+      Start game
+    </button>
+  </LobbyViewLayout>;
 };
 
-export default GameLobby;
+export default GameLobbyPage;

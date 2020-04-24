@@ -5,8 +5,8 @@ import './index.scss';
 
 const ListPlayers = ({ players }) => (
   <ul className="player-list">
-    {players.map(player => <li key={player}>
-      {player.name}
+    {players.map(player => <li key={player.id}>
+      {player.username}
     </li>)}
   </ul>
 );
