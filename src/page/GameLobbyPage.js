@@ -19,10 +19,8 @@ const GameLobbyPage = () => {
   }
 
   const handleStartGame = () => {
-    if (allPlayers.length > 1) {
-      dispatch(notifyStartGame());
-      setTimeout(() => setRedirect(true), 2000);
-    }
+    dispatch(notifyStartGame());
+    setTimeout(() => setRedirect(true), 2000);
   };
   // eslint-disable-next-line consistent-return
   if (redirect) {
