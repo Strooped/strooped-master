@@ -1,6 +1,6 @@
 import {
   put,
-  takeLatest,
+  takeEvery,
 } from 'redux-saga/effects';
 import { UPDATE_PLAYER_LIST_REQUESTED, UPDATE_PLAYER_LIST_FAILURE, UPDATE_PLAYER_LIST_SUCCESS } from './action';
 
@@ -20,5 +20,5 @@ function* updatePlayers(action) {
 
 
 export default function* watchPlayerUpdate() {
-  yield takeLatest(UPDATE_PLAYER_LIST_REQUESTED, updatePlayers);
+  yield takeEvery(UPDATE_PLAYER_LIST_REQUESTED, updatePlayers);
 }

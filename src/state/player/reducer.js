@@ -1,4 +1,8 @@
-import { UPDATE_PLAYER_LIST_REQUESTED, UPDATE_PLAYER_LIST_SUCCESS, UPDATE_PLAYER_LIST_FAILURE } from './action';
+import {
+  UPDATE_PLAYER_LIST_REQUESTED,
+  UPDATE_PLAYER_LIST_SUCCESS,
+  UPDATE_PLAYER_LIST_FAILURE,
+} from './action';
 
 const initialState = {
   allPlayers: [],
@@ -12,13 +16,12 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isLoading: true,
-        allPlayers: null,
       };
     case UPDATE_PLAYER_LIST_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        allPlayers: Object.assign(action.payload),
+        allPlayers: [...state.allPlayers, action.payload],
       };
     case UPDATE_PLAYER_LIST_FAILURE:
       return {

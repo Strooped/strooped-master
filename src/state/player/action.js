@@ -6,7 +6,6 @@ export const UPDATE_PLAYER_LIST_FAILURE = 'UPDATE_PLAYER_LIST_FAILURE';
 
 export const notifyStartGame = () => emitMessage('game:start');
 
-
 export const updatePlayerList = player => ({
   type: UPDATE_PLAYER_LIST_REQUESTED,
   payload: player,

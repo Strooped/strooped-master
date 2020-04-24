@@ -4,7 +4,10 @@ import {
   takeEvery,
   call,
   select,
+  take,
+  spawn,
 } from 'redux-saga/effects';
+import { eventChannel } from 'redux-saga';
 import { SOCKET_CONNECT_FAILURE, SOCKET_CONNECT_REQUESTED, SOCKET_CONNECT_SUCCESS } from './action';
 import { connectToSocket } from '../../utils/socket';
 import { updatePlayerList } from '../player/action';
@@ -13,17 +16,32 @@ const SOCKET_IO_HOST = process.env.STROOPED_API_HOST;
 
 let activeSocket = null;
 
+function createSocketChannel(socket) {
+  return eventChannel((emit) => {
+    const playerJoinHandler = (message) => {
+      console.info('Received message from client');
+      console.info(message);
+      emit(message);
+    };
+    socket.on('player:joined', playerJoinHandler);
+
+    const unsubscribe = () => {
+      socket.off('player:joined', playerJoinHandler);
+    };
+    return unsubscribe;
+  });
+}
+
 // eslint-disable-next-line require-yield
 function* listenOnSocketEvents(socket) {
   if (!socket) {
     throw new ReferenceError('Client has no active connection to server');
   }
-
-  socket.on('player:joined', (message) => {
-    console.info('Received message from client');
-    console.info(message);
-    put(updatePlayerList(message));
-  });
+  const channel = yield call(createSocketChannel, socket);
+  while (true) {
+    const player = yield take(channel);
+    yield put(updatePlayerList(player));
+  }
 }
 
 function* handleSocketConnection(action) {
@@ -46,7 +64,7 @@ function* handleSocketConnection(action) {
     });
 
     // Continue to listen on events
-    yield listenOnSocketEvents(activeSocket);
+    yield spawn(listenOnSocketEvents, activeSocket);
   } catch (err) {
     console.error(`Failed to talk with socket on host: ${SOCKET_IO_HOST}`, err);
     yield put({
