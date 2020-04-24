@@ -34,8 +34,7 @@ const GameLobbyPage = () => {
       {joinPin && <h2 className='title is-1 has-text-white'>Game PIN</h2>}
       <code className='is-size-1'>{joinPin}</code>
       <h3
-        style={{ margin: '50px 0 0' }}
-        className='title is-2 has-text-white has-margin-top-1'>
+        className='title is-2 has-text-white has-top-margin'>
         Players
       </h3>
         {allPlayers && <ListPlayers players={allPlayers}/>}
