@@ -15,14 +15,9 @@ PlayerScore.propTypes = {
   }),
 };
 
-const PlayerScoreBoard = ({ players }) => {
-  const playersOrderedByPoints = [...players]
-    .sort((prev, next) => next.score - prev.score);
-
-  return <ul className="playerscoreboard">
-    {playersOrderedByPoints.map((player, idx) => <PlayerScore key={`scoreboard-${idx}`} player={player}/>)}
-  </ul>;
-};
+const PlayerScoreBoard = ({ players }) => <ul className="playerscoreboard">
+  {players.map((player, idx) => <PlayerScore key={`scoreboard-${idx}`} player={player}/>)}
+</ul>;
 
 PlayerScoreBoard.propTypes = {
   players: PropTypes.arrayOf(PropTypes.shape({

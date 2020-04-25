@@ -3,7 +3,7 @@
 @import './skeleton';
 
 main {
-  height: 100vh;
+  height: 100%;
 }
 
 h2 {
@@ -35,6 +35,12 @@ h2 {
 }
 
 .has-vertical-margin {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.is-centered-in-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
