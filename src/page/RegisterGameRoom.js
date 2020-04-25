@@ -32,9 +32,9 @@ const RegisterGameRoom = () => {
   }
 
   return <Layout pageTitle={pageTitle} type="centered">
-    <h1 className="title is-2 has-text-centered">{pageTitle}</h1>
+    <h1 className="title is-2 has-text-centered has-text-light">{pageTitle}</h1>
 
-    {gameModeError && <section>
+    {gameModeError && <section className="has-text-light">
       <h3>Could not retrieve any game modes...</h3>
       <p>{gameModeError.message}</p>
     </section>}

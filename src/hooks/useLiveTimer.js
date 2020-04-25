@@ -6,7 +6,7 @@ const SECOND_IN_MS = 1000;
  * Live timer updates its state each second,
  * and returns how much time it is left and if it is completed.
  * */
-const useLiveTimer = ({ timeoutMs, shouldStart = false }) => {
+const useLiveTimer = ({ timeoutMs, shouldStart = true }) => {
   const [timeLeft, setTimeLeft] = useState(timeoutMs);
 
   useEffect(() => {

@@ -6,15 +6,15 @@ import 'regenerator-runtime/runtime';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+
+import './styles/globals.scss';
+
 import App from './App';
 
 import configureStore from './state/configureStore';
 // eslint-disable-next-line import/no-named-as-default
 import OuterErrorBoundary from './components/OuterErrorBoundary';
 import { registerReactAxe } from './utils/accessibilityUtil';
-
-import './styles/globals.scss';
-
 
 const { store } = configureStore();
 

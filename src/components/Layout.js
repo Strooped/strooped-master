@@ -5,14 +5,14 @@ import classNames from 'classnames';
 import './Layout.scss';
 
 // eslint-disable-next-line no-unused-vars
-const Layout = ({ children, pageTitle, type = null }) => <>
+const Layout = ({ children, pageTitle, type = null }) => <div className="genericlayout">
   <header className="navbar">
-    <span className="title is-1">Strooped</span>
+    <span className="title is-1 has-text-light">Strooped</span>
   </header>
   <main className={classNames('pagecontent', type ? `is-${type}` : null)}>
     {children}
   </main>
-</>;
+</div>;
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

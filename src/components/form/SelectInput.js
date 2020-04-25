@@ -18,7 +18,7 @@ const SelectInput = (props) => {
   const inputId = `select-${name}`;
 
   return <div className="field">
-    <label className="label" htmlFor={inputId}>{label}</label>
+    <label className="label has-text-light" htmlFor={inputId}>{label}</label>
     <div className="control">
       <div className="select is-fullwidth">
         <select

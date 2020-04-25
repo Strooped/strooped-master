@@ -78,7 +78,7 @@ const LoadTaskPage = ({ location }) => {
     // (we should actually load an intermediate scoreboard)
     if (!nextTask) {
       dispatch(notifyPlayersOfRoundEnd(round.id));
-      history.push('/round/');
+      history.push('/round/scoreboard/');
       return;
     }
 
