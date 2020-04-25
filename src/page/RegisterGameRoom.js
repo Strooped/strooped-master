@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../components/Layout';
 import RegisterGameForm from '../components/RegisterGameForm';
 import useGameRoom from '../hooks/useGameRoom';

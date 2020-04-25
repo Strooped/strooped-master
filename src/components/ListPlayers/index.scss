@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.player-list {
+  color: $list-color;
+  font-size: 36px;
+
+  li {
+    padding: 0 10px;
+  }
+}
