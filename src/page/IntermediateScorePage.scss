@@ -1,0 +1,38 @@
+
+.scorelayout {
+  align-items: flex-start;
+  display: flex;
+
+  height: 60vh;
+
+  justify-content: flex-start;
+
+  margin: 0 auto;
+  max-width: 60rem;
+  width: 100%;
+
+  &__scoreboard {
+    flex: 2;
+
+    height: 100%;
+
+    overflow-y: scroll;
+
+    ul {
+      height: 100%;
+    }
+  }
+
+  &__actions {
+    align-items: flex-end;
+    display: flex;
+
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-basis: 15em;
+
+    height: 100%;
+
+    justify-content: flex-end;
+  }
+}

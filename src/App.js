@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CurrentTaskPage from './page/CurrentTaskPage';
+import IntermediateScorePage from './page/IntermediateScorePage';
 import LoadRoundPage from './page/LoadRoundPage';
 import LoadTaskPage from './page/LoadTaskPage';
 import RegisterGameRoom from './page/RegisterGameRoom';
@@ -14,6 +15,7 @@ const App = () => <BrowserRouter>
     <Route exact path="/round/task/:taskId" component={CurrentTaskPage}/>
     <Route exact path="/round/task" component={LoadTaskPage}/>
     <Route exact path="/round/" component={LoadRoundPage}/>
+    <Route exact path="/round/scoreboard" component={IntermediateScorePage}/>
   </Switch>
 </BrowserRouter>;
 

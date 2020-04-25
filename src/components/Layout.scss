@@ -1,3 +1,17 @@
+@import '../styles/variables';
+
+.genericlayout {
+  background-color: $primary-background;
+
+  min-height: 100vh;
+  margin: 0;
+
+  padding: 0;
+}
+
+.navbar {
+  background-color: transparent;
+}
 
 .pagecontent {
   box-sizing: border-box;

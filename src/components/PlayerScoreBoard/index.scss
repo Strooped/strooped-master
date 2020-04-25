@@ -1,0 +1,57 @@
+@import '../../styles/variables';
+
+.playerscoreboard {
+  align-items: center;
+  display: flex;
+
+  flex-direction: column;
+  font-size: 1.4em;
+
+  justify-content: flex-start;
+
+  list-style-type: none;
+
+  padding: 0;
+
+  color: $text-light;
+}
+
+.playerscore {
+  align-items: stretch;
+
+  box-sizing: border-box;
+  border-radius: 0;
+
+  display: flex;
+
+  justify-content: space-between;
+  max-width: 10em;
+
+  padding: 0.7rem 1.6rem;
+
+  text-align: center;
+
+  width: 100%;
+
+  & ~ & {
+    border-top: $linen solid 2px;
+    margin-top: 0;
+  }
+
+  // First place
+  &:nth-child(1) {
+    background-color: $linen;
+    color: $text-dark;
+  }
+
+  &__points {
+    font-weight: 600;
+    color: inherit;
+    margin-right: 0.5rem;
+  }
+
+  &__username {
+    font-style: normal;
+    font-weight: 400;
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import CountdownTimer from '../components/CountdownTimer';
+import OrderedPlayerList from '../components/OrderedPlayerList';
 import TaskViewLayout from '../components/TaskViewLayout';
 import TaskWhiteBoard from '../components/TaskViewLayout/TaskWhiteBoard';
 import useGameRoom from '../hooks/useGameRoom';
@@ -13,10 +14,9 @@ const TIME_TO_ANSWER_DURATION_SECONDS = 5000;
 const CurrentTaskPage = () => {
   useGameRoom();
 
-  const pageTitle = 'What color is this?';
-
   const dispatch = useDispatch();
   const { currentTask, round } = useSelector(state => state.currentRound);
+  const players = useSelector(state => state.players.allPlayers);
 
   const liveTimer = useLiveTimer({
     timeoutMs: TIME_TO_ANSWER_DURATION_SECONDS,
@@ -34,15 +34,11 @@ const CurrentTaskPage = () => {
   }
 
   return <TaskViewLayout
-    pageTitle={pageTitle}
+    pageTitle="What color is this?"
     sideSection={<>
       <section>
         <h2 className="subtitle is-4 has-text-light">Players</h2>
-        <ol>
-          <li>Jon snow</li>
-          <li>Peter Baelish</li>
-          <li>Tyrion Lannister</li>
-        </ol>
+        <OrderedPlayerList players={players}/>
       </section>
       <CountdownTimer timeLeftMs={liveTimer.timeLeft} className="has-upper-auto-margin"/>
     </>}

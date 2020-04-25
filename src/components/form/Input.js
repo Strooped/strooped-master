@@ -18,7 +18,7 @@ const Input = (props) => {
   const inputId = `input-${name}`;
 
   return <div className="field">
-    {label && <label className="label" htmlFor={inputId}>{label}</label>}
+    {label && <label className="label has-text-light" htmlFor={inputId}>{label}</label>}
     <div className="control">
       <input
         name={name}
