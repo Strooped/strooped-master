@@ -6,7 +6,7 @@ exports[`<RegisterGameForm/> should render with game modes provided 1`] = `
     class="field"
   >
     <label
-      class="label"
+      class="label has-text-light"
       for="select-mode"
     >
       Game mode
@@ -47,7 +47,7 @@ exports[`<RegisterGameForm/> should render with game modes provided 1`] = `
     class="field"
   >
     <label
-      class="label"
+      class="label has-text-light"
       for="input-name"
     >
       Name of game

@@ -5,7 +5,7 @@ exports[`<SelectInput/> should render all options 1`] = `
   class="field"
 >
   <label
-    class="label"
+    class="label has-text-light"
     for="select-name"
   >
     Some label
