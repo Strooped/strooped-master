@@ -5,6 +5,7 @@ import qs from 'query-string';
 import { Redirect } from 'react-router';
 import useGameRoom from '../hooks/useGameRoom';
 import { updateCurrentRound } from '../state/currentRound/action';
+import { notifyPlayersOfGameEnd } from '../state/gameRoom/action';
 
 const getNextRound = (rounds, currentRound) => {
   if (!currentRound || !currentRound.id) {
@@ -35,7 +36,6 @@ const LoadRoundPage = ({ location }) => {
   const dispatch = useDispatch();
   const gameRoom = useGameRoom();
   const currentRound = useSelector(state => state.currentRound);
-
   const [redirectTo, setRedirectTo] = useState(null);
 
   const requestedRoundId = getRequestedRoundId(location);
@@ -63,6 +63,7 @@ const LoadRoundPage = ({ location }) => {
     // We are apparently done with our game and should
     // be redirected to the lobby
     if (!nextRound) {
+      dispatch(notifyPlayersOfGameEnd());
       setRedirectTo('/lobby');
       return;
     }
@@ -71,6 +72,13 @@ const LoadRoundPage = ({ location }) => {
     setRedirectTo('/round/task/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rounds.length]);
+
+  // This page should not be accessed if not game-room has been loaded already
+  const roomId = gameRoom?.room?.id;
+
+  if (!roomId) {
+    return <Redirect to="/"/>;
+  }
 
   if (redirectTo) {
     return <Redirect to={redirectTo}/>;
