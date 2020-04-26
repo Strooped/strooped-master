@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.gamemodeselect {
+  padding: 1em;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1em;
+}
+
+.gamemodepreview {
+  background-color: $button-background-color;
+  border: 0;
+
+  color: $text-light;
+
+  padding: 1em;
+
+  &:hover,
+  &:focus {
+    background-color: lighten($button-background-color, 5%);
+  }
+
+  h3 {
+    color: inherit;
+  }
+}

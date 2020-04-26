@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CurrentTaskPage from './page/CurrentTaskPage';
+import GameCompletedPage from './page/GameCompletedPage';
 import IntermediateScorePage from './page/IntermediateScorePage';
 import LoadRoundPage from './page/LoadRoundPage';
 import LoadTaskPage from './page/LoadTaskPage';
@@ -16,6 +17,7 @@ const App = () => <BrowserRouter>
     <Route exact path="/round/task" component={LoadTaskPage}/>
     <Route exact path="/round/" component={LoadRoundPage}/>
     <Route exact path="/round/scoreboard" component={IntermediateScorePage}/>
+    <Route exact path="/scoreboard" component={GameCompletedPage}/>
   </Switch>
 </BrowserRouter>;
 

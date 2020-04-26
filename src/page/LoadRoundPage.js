@@ -6,22 +6,7 @@ import { Redirect } from 'react-router';
 import useGameRoom from '../hooks/useGameRoom';
 import { updateCurrentRound } from '../state/currentRound/action';
 import { notifyPlayersOfGameEnd } from '../state/gameRoom/action';
-
-const getNextRound = (rounds, currentRound) => {
-  if (!currentRound || !currentRound.id) {
-    return rounds[0];
-  }
-
-  const currentRoundIndex = rounds.findIndex(round => round.id === currentRound.id);
-
-  if (currentRoundIndex >= rounds.length) {
-    return null;
-  }
-
-  return rounds[currentRoundIndex + 1];
-};
-
-const findRoundById = (rounds, roundId) => rounds.find(round => round.id === roundId) || null;
+import { findRoundById, getNextRound } from '../utils/taskUtil';
 
 const getRequestedRoundId = (location) => {
   const params = qs.parse(location.search);
@@ -64,7 +49,7 @@ const LoadRoundPage = ({ location }) => {
     // be redirected to the lobby
     if (!nextRound) {
       dispatch(notifyPlayersOfGameEnd());
-      setRedirectTo('/lobby');
+      setRedirectTo('/scoreboard');
       return;
     }
 
