@@ -32,7 +32,7 @@ const GameCompletedPage = () => {
       .catch(console.error);
   };
 
-  if (!roomId || exitGame) {
+  if (exitGame) {
     // Do a full redirect to disconnect client from socket
     window.location.href = '/';
     return null;
