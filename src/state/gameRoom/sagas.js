@@ -18,7 +18,7 @@ function* loadOrFetchGameRoom({ joinPin, roomId }) {
       throw new Error('No room is present in redux-store!');
     }
 
-    if (room.joinPin !== joinPin) {
+    if (!!room.joinPin && room.joinPin !== joinPin) {
       throw new Error(`Provided joinPin (${joinPin}) did not match joinPin in redux-store (${room.joinPin})`);
     }
 

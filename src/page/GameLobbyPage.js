@@ -14,10 +14,6 @@ const GameLobbyPage = () => {
   const { allPlayers = [] } = useSelector(state => state.players);
   const [redirect, setRedirect] = useState(false);
 
-  if (!joinPin) {
-    return <Redirect to={'/'} />;
-  }
-
   const handleStartGame = () => {
     dispatch(notifyStartGame());
     setTimeout(() => setRedirect(true), 2000);

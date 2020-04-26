@@ -58,13 +58,6 @@ const LoadRoundPage = ({ location }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rounds.length]);
 
-  // This page should not be accessed if not game-room has been loaded already
-  const roomId = gameRoom?.room?.id;
-
-  if (!roomId) {
-    return <Redirect to="/"/>;
-  }
-
   if (redirectTo) {
     return <Redirect to={redirectTo}/>;
   }

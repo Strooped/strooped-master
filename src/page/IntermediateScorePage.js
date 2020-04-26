@@ -8,15 +8,10 @@ import usePlayerScoreBoard from '../hooks/usePlayerScoreboard';
 import './IntermediateScorePage.scss';
 
 const IntermediateScorePage = () => {
-  const gameRoom = useGameRoom();
-  const roomId = gameRoom?.room?.id;
+  useGameRoom();
 
   const [shouldStartNextRound, triggerStartNextRound] = useState(false);
   const players = usePlayerScoreBoard();
-
-  if (!roomId) {
-    return <Redirect to="/"/>;
-  }
 
   if (shouldStartNextRound) {
     console.info('Navigating to next round...');

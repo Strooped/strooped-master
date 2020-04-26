@@ -28,14 +28,6 @@ const LoadTaskPage = ({ location }) => {
   const [hasLoadedTask, setHasLoadedTask] = useState(false);
 
   useEffect(() => {
-    // If we are not connected to the socket,
-    // is there no point in continuing
-    if (!gameRoom.room || !gameRoom.room.id) {
-      console.warn('No game room present. Redirecting to homepage...');
-      history.push('/');
-      return;
-    }
-
     if (!round || !round.id) {
       history.push('/round/');
       return;
