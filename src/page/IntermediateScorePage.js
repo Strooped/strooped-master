@@ -29,7 +29,7 @@ const IntermediateScorePage = () => {
       <section className="scorelayout__actions">
         <button
           onClick={triggerStartNextRound}
-          className="button is-link is-rounded is-centered is-centered-in-container"
+          className="button is-link is-rounded is-size-4 is-centered is-centered-in-container"
         >Start next round</button>
       </section>
     </div>

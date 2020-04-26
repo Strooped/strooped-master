@@ -9,16 +9,17 @@
 }
 
 .gamemodepreview {
-  background-color: $button-background-color;
-  border: 0;
+  background-color: $primary-light-background;
+  border: $linen solid 2px;
+  border-radius: 5px;
 
-  color: $text-light;
+  color: darken($primary-background, 30%);
 
   padding: 1em;
 
   &:hover,
   &:focus {
-    background-color: lighten($button-background-color, 5%);
+    background-color: lighten($primary-light-background, 10%);
   }
 
   h3 {

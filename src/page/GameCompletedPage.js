@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
 import { Redirect } from 'react-router';
 import GameModeSelect from '../components/GameModeSelect';
 import Layout from '../components/Layout';
@@ -47,12 +48,14 @@ const GameCompletedPage = () => {
   return <Layout pageTitle="Game finished">
     <div className="gamecompletedpage">
       <div className="gamecompletedpage__actions">
-        <h2>Choose next game mode</h2>
-        <GameModeSelect modes={otherGameModes} onChange={handleGameModeChange}/>
-        <h2>Or</h2>
+        {otherGameModes.length > 0 && <>
+          <h2>Choose next game mode</h2>
+          <GameModeSelect modes={otherGameModes} onChange={handleGameModeChange}/>
+          <strong className="has-text-light">Or</strong>
+        </>}
         <button
           onClick={() => setExitGame(true)}
-          className="button is-link is-rounded is-centered"
+          className={classNames('button is-link is-rounded is-size-4 is-centered', { 'is-only-item': otherGameModes.length < 1 })}
         >Exit game</button>
       </div>
 

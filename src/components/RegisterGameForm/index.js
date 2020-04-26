@@ -23,7 +23,7 @@ const RegisterGameForm = ({ onRegistered, modes }) => {
     />
 
     <div className="field is-grouped">
-      <button className="button is-link is-fullwidth" type="submit" disabled={!selectedMode}>Create game</button>
+      <button className="button is-link is-fullwidth is-rounded is-size-4 has-vertical-margin" type="submit" disabled={!selectedMode}>Create game</button>
     </div>
   </form>;
 };

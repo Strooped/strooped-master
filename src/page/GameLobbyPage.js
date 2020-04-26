@@ -34,7 +34,7 @@ const GameLobbyPage = () => {
         {allPlayers && <ListPlayers players={allPlayers}/>}
     </main>
     <button
-      className="button is-link is-fullwidth is-size-1"
+      className="button is-link is-fullwidth is-size-2 is-rounded"
       onClick={handleStartGame}
       type="button">
       Start game
