@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import CountdownTimer from '../components/CountdownTimer';
@@ -19,10 +19,11 @@ const CurrentTaskPage = () => {
   const dispatch = useDispatch();
   const { currentTask, round } = useSelector(state => state.currentRound);
   const players = useSelector(state => state.players.allPlayers);
+  const [isPaused, setPause] = useState(false);
 
   const liveTimer = useLiveTimer({
     timeoutMs: TIME_TO_ANSWER_DURATION_SECONDS,
-    shouldStart: !!currentTask,
+    shouldStart: !!currentTask && !isPaused,
   });
 
   if (!round) {
@@ -46,6 +47,7 @@ const CurrentTaskPage = () => {
         />
       </section>
       <CountdownTimer timeLeftMs={liveTimer.timeLeft} className="taskclock"/>
+      <button className="button is-text" onClick={() => setPause(!isPaused)}>{!isPaused ? 'pause' : 'continue'}</button>
     </>}
   >
     <TaskWhiteBoard colorToDisplay={currentTask.correctAnswer}/>
