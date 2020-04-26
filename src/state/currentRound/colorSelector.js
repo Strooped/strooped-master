@@ -22,14 +22,25 @@ const getColorByHex = async (colorHex) => {
 
 const takeRandomItem = collection => collection[Math.floor(Math.random() * collection.length)];
 
+/**
+ * Finds a color-name to combine with the correct answer.
+ * Valid color-names are limited by the items in task.buttons.
+ *
+ * Adjusting this function can help make a task easier or more difficult
+ *
+ * @return {object} name: A usable name, is not equal to the correct answer
+ *                  color: Hex-color-value for the correct answer
+ * */
 // eslint-disable-next-line import/prefer-default-export
-export const getColorQuestion = async (correctColor) => {
+export const getColorQuestion = async (task) => {
+  const correctColor = task.correctAnswer;
   const { color } = await getColorByHex(correctColor);
 
-  const allOtherColors = (await getAllColors())
+  const colorOptions = (await getAllColors())
+    .filter(otherColor => task.buttons.includes(otherColor.color))
     .filter(otherColor => otherColor.color !== correctColor);
 
-  const { name } = takeRandomItem(allOtherColors);
+  const { name } = takeRandomItem(colorOptions);
 
   return { name, color };
 };

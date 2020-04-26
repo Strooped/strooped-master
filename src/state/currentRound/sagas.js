@@ -11,7 +11,7 @@ function* changeTask(action) {
   console.info(`Changing task to: (${task.id}, ${task.correctAnswer})`);
 
   try {
-    const question = yield call(getColorQuestion, task.correctAnswer);
+    const question = yield call(getColorQuestion, task);
 
     yield put({
       type: CURRENT_TASK_UPDATE_SUCCESS,
