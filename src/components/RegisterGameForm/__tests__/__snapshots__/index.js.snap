@@ -30,7 +30,7 @@ exports[`<RegisterGameForm/> should render with game modes provided 1`] = `
     class="field is-grouped"
   >
     <button
-      class="button is-link is-fullwidth"
+      class="button is-link is-fullwidth is-rounded is-size-4 has-vertical-margin"
       disabled=""
       type="submit"
     >

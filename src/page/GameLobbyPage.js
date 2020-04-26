@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
+import Layout from '../components/Layout';
 
-import LobbyViewLayout from '../components/LobbyViewLayout';
 import { notifyStartGame } from '../state/player/action';
 import ListPlayers from '../components/ListPlayers';
 import useGameRoom from '../hooks/useGameRoom';
+
+import './GameLobbyPage.scss';
 
 const GameLobbyPage = () => {
   const dispatch = useDispatch();
@@ -23,23 +25,24 @@ const GameLobbyPage = () => {
     return <Redirect to="/round/"/>;
   }
 
-  return <LobbyViewLayout>
-    <main>
+  return <Layout pageTitle="Lobby" type="centered" hasExitButton={true}>
+    <article className="lobbyview">
       {joinPin && <h2 className='title is-1 has-text-white'>Game PIN</h2>}
       <code className='is-size-1'>{joinPin}</code>
-      <h3
-        className='title is-2 has-text-white has-top-margin'>
+      <h3 className='title is-2 has-text-white has-top-margin'>
         Players
       </h3>
-        {allPlayers && <ListPlayers players={allPlayers}/>}
-    </main>
-    <button
-      className="button is-link is-fullwidth is-size-2 is-rounded"
-      onClick={handleStartGame}
-      type="button">
-      Start game
-    </button>
-  </LobbyViewLayout>;
+
+      {allPlayers && <ListPlayers players={allPlayers}/>}
+
+      <button
+        className="button is-link is-fullwidth is-size-4 is-rounded has-upper-auto-margin"
+        onClick={handleStartGame}
+        type="button">
+        Start game
+      </button>
+    </article>
+  </Layout>;
 };
 
 export default GameLobbyPage;

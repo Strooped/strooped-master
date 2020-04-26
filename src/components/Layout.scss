@@ -10,7 +10,22 @@
 }
 
 .navbar {
+  align-items: center;
   background-color: transparent;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 1em;
+
+  > .title {
+    margin-bottom: 0;
+  }
+
+  > .exitbutton {
+    margin-left: auto;
+  }
 }
 
 .pagecontent {
