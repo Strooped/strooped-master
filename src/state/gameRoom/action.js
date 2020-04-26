@@ -9,4 +9,9 @@ export const joinGameRoom = ({ joinPin, roomId }) => ({
   payload: { joinPin, roomId },
 });
 
+export const setCurrentGameRoom = gameRoom => ({
+  type: GAME_ROOM_CONNECT_SUCCESS,
+  payload: gameRoom,
+});
+
 export const notifyPlayersOfGameEnd = () => emitMessage('game:ending', {});

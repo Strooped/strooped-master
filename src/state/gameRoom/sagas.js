@@ -7,7 +7,7 @@ import {
 } from 'redux-saga/effects';
 import { fetchCurrentGameRoom } from '../../utils/api/gameRoomApi';
 import { SOCKET_CONNECT_FAILURE, SOCKET_CONNECT_SUCCESS, connectToSocket } from '../socket/action';
-import { GAME_ROOM_CONNECT_FAILURE, GAME_ROOM_CONNECT_REQUESTED, GAME_ROOM_CONNECT_SUCCESS } from './action';
+import { GAME_ROOM_CONNECT_FAILURE, GAME_ROOM_CONNECT_REQUESTED, setCurrentGameRoom } from './action';
 
 function* loadOrFetchGameRoom({ joinPin, roomId }) {
   if (!roomId) {
@@ -32,7 +32,10 @@ function* loadOrFetchGameRoom({ joinPin, roomId }) {
 function* joinGameRoom(action) {
   const { joinPin, roomId } = action.payload;
   try {
-    yield put(connectToSocket({ token: joinPin, role: 'master' }));
+    yield put(connectToSocket({
+      token: joinPin,
+      role: 'master',
+    }));
 
     const socketAction = yield take([SOCKET_CONNECT_SUCCESS, SOCKET_CONNECT_FAILURE]);
 
@@ -42,15 +45,17 @@ function* joinGameRoom(action) {
       throw socketAction.error;
     }
 
-    const gameRoom = yield loadOrFetchGameRoom({ joinPin, roomId });
-
-    yield put({
-      type: GAME_ROOM_CONNECT_SUCCESS,
-      // joinPin has to be replaced by a non-hardcoded value
-      payload: gameRoom,
+    const gameRoom = yield loadOrFetchGameRoom({
+      joinPin,
+      roomId,
     });
+
+    yield put(setCurrentGameRoom(gameRoom));
   } catch (error) {
-    yield put({ type: GAME_ROOM_CONNECT_FAILURE, error });
+    yield put({
+      type: GAME_ROOM_CONNECT_FAILURE,
+      error,
+    });
   }
 }
 

@@ -14,3 +14,17 @@ export const createGameRoom = gameModeId => callPost(
 );
 
 export const fetchCurrentGameRoom = roomId => callGet(buildUrl(`/v1/game-rooms/${roomId}/`));
+
+export const replaceGameMode = async (roomId, newModeId) => {
+  await callPost(
+    buildUrl(`/v1/game-rooms/${roomId}`),
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ mode: newModeId }),
+    },
+  );
+
+  return fetchCurrentGameRoom(roomId);
+};

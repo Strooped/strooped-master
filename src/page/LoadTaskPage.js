@@ -5,26 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router';
 import useGameRoom from '../hooks/useGameRoom';
 import { changeCurrentTask, notifyPlayersOfNewTask, notifyPlayersOfRoundEnd } from '../state/currentRound/action';
-
-const findTaskById = (tasks, taskId) => tasks.find(task => task.id === taskId) || null;
-
-const getNextTask = (tasks, currentTask) => {
-  if (!currentTask) {
-    return tasks[0];
-  }
-
-  const currentTaskIndex = tasks.findIndex(task => task.id === currentTask.id);
-
-  if (currentTaskIndex < 0 || currentTaskIndex === undefined) {
-    return tasks[0];
-  }
-
-  if (currentTaskIndex >= tasks.length) {
-    return null;
-  }
-
-  return tasks[currentTaskIndex + 1];
-};
+import { notifyPlayersOfGameEnd } from '../state/gameRoom/action';
+import { findTaskById, getNextRound, getNextTask } from '../utils/taskUtil';
 
 const getRequestedTaskId = (location) => {
   const params = qs.parse(location.search);
@@ -73,9 +55,17 @@ const LoadTaskPage = ({ location }) => {
       nextTask = getNextTask(round.tasks, currentTask);
     }
 
-    // No next task available
-    // then attempt to load the next round
-    // (we should actually load an intermediate scoreboard)
+    const nextRound = getNextRound(gameRoom?.room?.gameMode?.rounds ?? [], round);
+    // We are fully done if there is no next task and no next round available
+    const isDoneWithGame = !nextTask && !nextRound;
+
+    if (isDoneWithGame) {
+      dispatch(notifyPlayersOfGameEnd());
+      history.push('/scoreboard/');
+      return;
+    }
+
+    // Users will probably see the intermediate scoreboard
     if (!nextTask) {
       dispatch(notifyPlayersOfRoundEnd(round.id));
       history.push('/round/scoreboard/');
