@@ -20,3 +20,6 @@ export const updateInPlace = (items, updatedItem, isCorrectItem) => [...items]
     }
     return item;
   });
+
+
+export const takeN = (items, numberOfItems) => items.slice(0, numberOfItems);
