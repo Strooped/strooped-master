@@ -1,5 +1,4 @@
 
-
 export const getNextRound = (rounds, currentRound) => {
   if (!currentRound || !currentRound.id) {
     return rounds[0];

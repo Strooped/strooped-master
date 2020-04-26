@@ -3,74 +3,35 @@
 exports[`<RegisterGameForm/> should render with game modes provided 1`] = `
 <form>
   <div
-    class="field"
+    class="gamemodeselect"
   >
-    <label
-      class="label has-text-light"
-      for="select-mode"
+    <button
+      class="gamemodepreview"
     >
-      Game mode
-    </label>
-    <div
-      class="control"
-    >
-      <div
-        class="select is-fullwidth"
+      <h3
+        class="subtitle is-4"
       >
-        <select
-          id="select-mode"
-          name="mode"
-          required=""
-        >
-          <option
-            disabled=""
-            value=""
-          >
-            No game selected
-          </option>
-          <option
-            selected=""
-            value="1"
-          >
-            Mode 1
-          </option>
-          <option
-            value="2"
-          >
-            Mode 2
-          </option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <div
-    class="field"
-  >
-    <label
-      class="label has-text-light"
-      for="input-name"
+        Mode 1
+      </h3>
+      <p />
+    </button>
+    <button
+      class="gamemodepreview"
     >
-      Name of game
-    </label>
-    <div
-      class="control"
-    >
-      <input
-        class="input"
-        id="input-name"
-        name="name"
-        placeholder="Super game"
-        required=""
-        type="text"
-        value=""
-      />
-    </div>
+      <h3
+        class="subtitle is-4"
+      >
+        Mode 2
+      </h3>
+      <p />
+    </button>
   </div>
   <div
     class="field is-grouped"
   >
     <button
       class="button is-link is-fullwidth"
+      disabled=""
       type="submit"
     >
       Create game
