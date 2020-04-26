@@ -14,28 +14,20 @@ import { updatePlayerList, updatePlayerScore } from '../player/action';
 
 const SOCKET_IO_HOST = process.env.STROOPED_API_HOST;
 
-let activeSocket = null;
-
-function createSocketChannel(socket) {
+function createSocketChannel(socket, events) {
   return eventChannel((emit) => {
-    const playerJoinHandler = (payload) => {
-      console.info('Received message from client');
-      console.info(payload);
-      emit({ event: 'player:joined', payload });
-    };
-    socket.on('player:joined', playerJoinHandler);
+    const handlers = events.map((event) => {
+      const handler = payload => emit({ event, payload });
 
-    const playerAnswerHandler = (payload) => {
-      console.info('Received task answer from player');
-      emit({ event: 'task:answer', payload });
-    };
-    socket.on('task:answer', playerAnswerHandler);
+      socket.on(event, handler);
+      return [event, handler];
+    });
 
-    const unsubscribe = () => {
-      socket.off('player:joined', playerJoinHandler);
-      socket.off('task:answer', playerAnswerHandler);
+    return function unsubscribe() {
+      handlers.forEach(([event, handler]) => {
+        socket.off(event, handler);
+      });
     };
-    return unsubscribe;
   });
 }
 
@@ -52,8 +44,10 @@ function* listenOnSocketEvents(socket) {
     'player:joined': payload => updatePlayerList(payload.player),
     'task:answer': payload => updatePlayerScore(payload.player),
   };
+  const events = Object.keys(actionByEvent);
 
-  const channel = yield call(createSocketChannel, socket);
+  const channel = yield call(createSocketChannel, socket, events);
+
   while (true) {
     const { event, payload } = yield take(channel);
     console.info('Event from socket');
@@ -66,7 +60,6 @@ function* listenOnSocketEvents(socket) {
     }
 
     const action = actionByEvent[event](payload);
-
     yield put(action);
   }
 }
@@ -76,7 +69,7 @@ function* handleSocketConnection(action) {
   console.info(`Connecting to soket on host: ${SOCKET_IO_HOST}`);
 
   try {
-    activeSocket = yield call(
+    const activeSocket = yield call(
       connectToSocket,
       SOCKET_IO_HOST,
       { query },
@@ -105,7 +98,7 @@ function* emitMessageToSocket(action) {
   console.info('%c Sending message to socket...', 'color: #993669');
   console.info(action);
 
-  const { name, payload } = action.payload;
+  const { name: event, payload } = action.payload;
 
   const { connection: socket, isConnected } = yield select(state => state.socket.socket);
 
@@ -115,7 +108,7 @@ function* emitMessageToSocket(action) {
     return;
   }
 
-  socket.emit(name, payload);
+  socket.emit(event, payload);
 }
 
 export default function* watchSocketConnection() {
