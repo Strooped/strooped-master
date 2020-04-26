@@ -34,13 +34,13 @@ const takeRandomItem = collection => collection[Math.floor(Math.random() * colle
 // eslint-disable-next-line import/prefer-default-export
 export const getColorQuestion = async (task) => {
   const correctColor = task.correctAnswer;
-  const { name } = await getColorByHex(correctColor);
+  const { color } = await getColorByHex(correctColor);
 
   const colorOptions = (await getAllColors())
     .filter(otherColor => task.buttons.includes(otherColor.color))
     .filter(otherColor => otherColor.color !== correctColor);
 
-  const { color } = takeRandomItem(colorOptions);
+  const { name } = takeRandomItem(colorOptions);
 
   return { name, color };
 };
