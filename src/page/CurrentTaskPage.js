@@ -9,6 +9,8 @@ import useGameRoom from '../hooks/useGameRoom';
 import useLiveTimer from '../hooks/useLiveTimer';
 import { notifyTaskTimeout } from '../state/currentRound/action';
 
+import './CurrentTaskPage.scss';
+
 const TIME_TO_ANSWER_DURATION_SECONDS = 5000;
 
 const CurrentTaskPage = () => {
@@ -36,11 +38,14 @@ const CurrentTaskPage = () => {
   return <TaskViewLayout
     pageTitle="What color is this?"
     sideSection={<>
-      <section>
+      <section className="gamemetadata">
         <h2 className="subtitle is-4 has-text-light">Players</h2>
-        <OrderedPlayerList players={players}/>
+        <OrderedPlayerList
+          className="gamemetadata__players"
+          players={players}
+        />
       </section>
-      <CountdownTimer timeLeftMs={liveTimer.timeLeft} className="has-upper-auto-margin"/>
+      <CountdownTimer timeLeftMs={liveTimer.timeLeft} className="taskclock"/>
     </>}
   >
     <TaskWhiteBoard colorToDisplay={currentTask}/>

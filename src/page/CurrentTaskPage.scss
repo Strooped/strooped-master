@@ -1,0 +1,14 @@
+
+.gamemetadata {
+  flex: 1;
+
+  &__players {
+    height: 60vh;
+
+    overflow-y: scroll;
+  }
+}
+
+.taskclock {
+  flex: 0;
+}
