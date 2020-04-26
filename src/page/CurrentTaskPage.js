@@ -48,7 +48,7 @@ const CurrentTaskPage = () => {
       <CountdownTimer timeLeftMs={liveTimer.timeLeft} className="taskclock"/>
     </>}
   >
-    <TaskWhiteBoard colorToDisplay={currentTask}/>
+    <TaskWhiteBoard colorToDisplay={currentTask.correctAnswer}/>
   </TaskViewLayout>;
 };
 

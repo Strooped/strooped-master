@@ -4,7 +4,7 @@ import qs from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router';
 import useGameRoom from '../hooks/useGameRoom';
-import { changeCurrentTask, notifyPlayersOfNewTask, notifyPlayersOfRoundEnd } from '../state/currentRound/action';
+import { changeCurrentTask, notifyPlayersOfRoundEnd } from '../state/currentRound/action';
 import { notifyPlayersOfGameEnd } from '../state/gameRoom/action';
 import { findTaskById, getNextRound, getNextTask } from '../utils/taskUtil';
 
@@ -64,8 +64,6 @@ const LoadTaskPage = ({ location }) => {
       return;
     }
 
-    // We need to notify the players of what task is next
-    dispatch(notifyPlayersOfNewTask(nextTask));
     dispatch(changeCurrentTask({ task: nextTask }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
