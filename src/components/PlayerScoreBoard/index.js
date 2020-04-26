@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './index.scss';
+import { trim } from '../../utils/stringUtil';
+import PlayerItem from '../PlayerItem';
 
 const PlayerScore = ({ player }) => <li className="playerscore">
   <strong className="playerscore__points">{player.score}</strong>
-  <em className="playerscore__username">{player.username}</em>
+  <em className="playerscore__username">{trim(player.username, 20)}</em>
 </li>;
 
 PlayerScore.propTypes = {
@@ -15,9 +17,11 @@ PlayerScore.propTypes = {
   }),
 };
 
-const PlayerScoreBoard = ({ players }) => <ul className="playerscoreboard">
-  {players.map((player, idx) => <PlayerScore key={`scoreboard-${idx}`} player={player}/>)}
-</ul>;
+const PlayerScoreBoard = ({ players }) => <div className="content">
+  <ol className="playerscoreboard" type="1">
+    {players.map((player, idx) => <li key={`scoreboard-${idx}`}><PlayerItem player={player}/></li>)}
+  </ol>
+</div>;
 
 PlayerScoreBoard.propTypes = {
   players: PropTypes.arrayOf(PropTypes.shape({
