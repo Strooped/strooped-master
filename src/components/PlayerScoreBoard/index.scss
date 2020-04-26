@@ -1,10 +1,62 @@
 @import '../../styles/variables';
 
+.podium {
+  align-items: flex-end;
+  display: flex;
+
+  margin: 0 auto 1em;
+  max-width: 40em;
+
+  width: 100%;
+
+  justify-content: center;
+
+  &__position {
+    flex: 1;
+
+    & ~ & {
+      margin: 0 0.5rem;
+    }
+
+    &__box {
+      background-color: $white-ghost;
+
+      width: 12em;
+    }
+  }
+
+  .has-position-1 {
+    order: 2;
+
+    .podium__position__box {
+      background-color: $linen;
+      height: 20em;
+    }
+  }
+
+  .has-position-2 {
+    order: 1;
+
+    .podium__position__box {
+      background-color: $white-snow;
+      height: 10em;
+    }
+  }
+
+  .has-position-3 {
+    order: 3;
+
+    .podium__position__box {
+      height: 5em;
+    }
+  }
+}
+
 .playerscoreboard {
   align-items: center;
   display: flex;
 
-  flex-direction: column;
+  flex-wrap: wrap;
   font-size: 1.4em;
 
   justify-content: flex-start;
@@ -12,44 +64,13 @@
   padding: 0;
 
   color: $text-light;
-}
 
-.playerscore {
-  align-items: stretch;
+  li {
+    margin-left: 2em;
+    padding-left: 0;
 
-  box-sizing: border-box;
-  border-radius: 0;
-
-  display: flex;
-
-  justify-content: space-between;
-  max-width: 10em;
-
-  padding: 0.7rem 1.6rem;
-
-  text-align: center;
-
-  width: 100%;
-
-  & ~ & {
-    border-top: $linen solid 2px;
-    margin-top: 0;
-  }
-
-  // First place
-  &:nth-child(1) {
-    background-color: $linen;
-    color: $text-dark;
-  }
-
-  &__points {
-    font-weight: 600;
-    color: inherit;
-    margin-right: 0.5rem;
-  }
-
-  &__username {
-    font-style: normal;
-    font-weight: 400;
+    & ~ & {
+      margin-top: 0;
+    }
   }
 }
