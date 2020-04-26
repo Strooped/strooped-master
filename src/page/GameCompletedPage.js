@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import classNames from 'classnames';
 import { Redirect } from 'react-router';
 import GameModeSelect from '../components/GameModeSelect';
 import Layout from '../components/Layout';
@@ -21,7 +20,6 @@ const GameCompletedPage = () => {
   const { modes: gameModes } = useSelector(state => state.gameMode);
 
   const [gotoLobby, setGotoLobby] = useState(false);
-  const [exitGame, setExitGame] = useState(false);
 
   const handleGameModeChange = (newMode) => {
     replaceGameMode(roomId, newMode.id)
@@ -33,31 +31,18 @@ const GameCompletedPage = () => {
       .catch(console.error);
   };
 
-  if (exitGame) {
-    // Do a full redirect to disconnect client from socket
-    window.location.href = '/';
-    return null;
-  }
-
   if (gotoLobby) {
     return <Redirect to="/lobby"/>;
   }
 
   const otherGameModes = gameModes.filter(mode => mode.id !== gameRoom?.room?.gameMode?.id);
 
-  return <Layout pageTitle="Game finished">
+  return <Layout pageTitle="Game finished" hasExitButton={true}>
     <div className="gamecompletedpage">
-      <div className="gamecompletedpage__actions">
-        {otherGameModes.length > 0 && <>
-          <h2>Choose next game mode</h2>
-          <GameModeSelect modes={otherGameModes} onChange={handleGameModeChange}/>
-          <strong className="has-text-light">Or</strong>
-        </>}
-        <button
-          onClick={() => setExitGame(true)}
-          className={classNames('button is-link is-rounded is-size-4 is-centered', { 'is-only-item': otherGameModes.length < 1 })}
-        >Exit game</button>
-      </div>
+      {otherGameModes.length > 0 && <section className="gamecompletedpage__actions">
+        <h2>Choose next game mode</h2>
+        <GameModeSelect modes={otherGameModes} onChange={handleGameModeChange}/>
+      </section>}
 
       <div className="gamecompletedpage__scores">
         <h2>Scoreboard</h2>

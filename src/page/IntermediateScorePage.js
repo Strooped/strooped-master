@@ -18,7 +18,7 @@ const IntermediateScorePage = () => {
     return <Redirect to="/round/"/>;
   }
 
-  return <Layout pageTitle="Round complete">
+  return <Layout pageTitle="Round complete" hasExitButton={true}>
     <h1 className="title is-1 has-text-light has-text-centered">Round complete</h1>
 
     <div className="scorelayout">
