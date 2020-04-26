@@ -1,3 +1,4 @@
+import { GAME_ROOM_RESET_PLAYER_DATA } from '../gameRoom/action';
 import {
   CURRENT_ROUND_UPDATE,
   CURRENT_TASK_UPDATE_FAILURE,
@@ -40,6 +41,12 @@ export default function reducer(state = initialState, action) {
         round: action.payload,
         currentTask: null,
         error: null,
+      };
+    case GAME_ROOM_RESET_PLAYER_DATA:
+      return {
+        ...state,
+        currentTask: null,
+        round: null,
       };
     default:
       return state;

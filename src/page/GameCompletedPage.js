@@ -8,7 +8,7 @@ import useGameRoom from '../hooks/useGameRoom';
 import usePlayerScoreBoard from '../hooks/usePlayerScoreboard';
 
 import './GameCompletedPage.scss';
-import { setCurrentGameRoom } from '../state/gameRoom/action';
+import { resetPlayerData, setCurrentGameRoom } from '../state/gameRoom/action';
 import { replaceGameMode } from '../utils/api/gameRoomApi';
 
 const GameCompletedPage = () => {
@@ -26,6 +26,7 @@ const GameCompletedPage = () => {
     replaceGameMode(roomId, newMode.id)
       .then((updatedRoom) => {
         dispatch(setCurrentGameRoom(updatedRoom));
+        dispatch(resetPlayerData());
         setGotoLobby(true);
       })
       .catch(console.error);

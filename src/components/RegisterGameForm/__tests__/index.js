@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, mount } from 'enzyme';
-import { submitForm, updateFormField } from '../../../../test/util';
+import { submitForm } from '../../../../test/util';
 import RegisterGameForm from '../index';
 
 jest.mock('../../../utils/api/gameRoomApi');
@@ -43,8 +43,7 @@ describe('<RegisterGameForm/>', () => {
       onRegistered={onRegisteredSpy}
     />);
 
-    await updateFormField(wrapper.find('input[name="name"]'), { name: 'name', value: 'Some game' });
-    await updateFormField(wrapper.find('input[name="name"]'), { name: 'mode', value: '2' });
+    wrapper.find('button').first().simulate('click');
 
     await submitForm(wrapper.find('form'));
 
