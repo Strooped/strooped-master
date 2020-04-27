@@ -11,7 +11,7 @@ import { notifyTaskTimeout } from '../state/currentRound/action';
 
 import './CurrentTaskPage.scss';
 
-const TIME_TO_ANSWER_DURATION_SECONDS = 5000;
+const TIME_TO_ANSWER_DURATION_SECONDS = 4000;
 
 const CurrentTaskPage = () => {
   useGameRoom();
