@@ -40,12 +40,12 @@ const GameCompletedPage = () => {
   return <Layout pageTitle="Game finished" hasExitButton={true}>
     <div className="gamecompletedpage">
       {otherGameModes.length > 0 && <section className="gamecompletedpage__actions">
-        <h2>Choose next game mode</h2>
+        <h2 className="subtitle is-2 has-text-centered has-text-light">Choose next game mode</h2>
         <GameModeSelect modes={otherGameModes} onChange={handleGameModeChange}/>
       </section>}
 
       <div className="gamecompletedpage__scores">
-        <h2>Scoreboard</h2>
+        <h2 className="subtitle is-2 has-text-centered has-text-light">Scoreboard</h2>
         <PlayerScoreBoard players={players}/>
       </div>
     </div>
