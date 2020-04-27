@@ -31,7 +31,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
     "@sentry/browser": "^5.14.2",
-    "autoprefixer": "^9.6.1",
+    "autoprefixer": "^9.7.5",
     "base64url": "^3.0.1",
     "bulma": "^0.8.0",
     "classnames": "^2.2.6",
