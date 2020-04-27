@@ -1,4 +1,4 @@
-import { removeItem, shuffle } from '../../utils/arrayUtil';
+import { shuffle } from '../../utils/arrayUtil';
 import { getContrastYIQ } from '../../utils/colorUtil';
 
 let cachedColors = null;
@@ -49,13 +49,20 @@ const getColorQuestion = async (task) => {
 };
 
 const injectBackgroundColors = (buttons) => {
-  let colorPool = shuffle(buttons.map(button => button.color));
+  const defaultBackgroundColor = '#EFEFEF';
+  const colorPool = shuffle(buttons.map(button => button.color));
 
   return buttons.map((button) => {
     // We want to use another background color, than the actuall button color,
     // to make it more difficult
-    const backgroundColor = colorPool.find(otherColor => otherColor !== button.color);
-    colorPool = removeItem(colorPool, backgroundColor);
+    const backgroundColorIndex = colorPool.findIndex(otherColor => otherColor !== button.color);
+    const backgroundColor = backgroundColorIndex > -1
+      ? colorPool[backgroundColorIndex]
+      : defaultBackgroundColor;
+
+    if (backgroundColorIndex > -1) {
+      colorPool.splice(backgroundColorIndex, 1);
+    }
 
     const fontColor = getContrastYIQ(backgroundColor, { light: '#ffffff', dark: '#222222' });
 
