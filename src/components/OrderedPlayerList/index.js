@@ -10,7 +10,7 @@ OrderedPlayerList.propTypes = {
   players: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.any.isRequired,
     username: PropTypes.string.isRequired,
-    score: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired,
   })),
   className: PropTypes.string,
 };

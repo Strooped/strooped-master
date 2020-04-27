@@ -11,7 +11,7 @@ PlayerItem.propTypes = {
   player: PropTypes.shape({
     id: PropTypes.any.isRequired,
     username: PropTypes.string.isRequired,
-    score: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired,
   }),
 };
 
