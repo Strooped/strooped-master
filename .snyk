@@ -1,0 +1,36 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - formik > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - html-webpack-plugin > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - webpack-merge > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > postcss-reporter > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > table > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - webpack-dev-server > http-proxy-middleware > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > postcss-jsx > @babel/core > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - webpack-dev-server > portfinder > async > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/traverse > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helpers > @babel/traverse > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
+    - stylelint > postcss-jsx > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-04-30T23:21:24.362Z'
