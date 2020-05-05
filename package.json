@@ -15,7 +15,9 @@
     "lint:styles": "stylelint \"src/**/*.scss\"",
     "lint:js": "eslint --ext .js --ext .jsx src --max-warnings 10",
     "lint:fix": "eslint  --ext .js --ext .jsx src/ --fix",
-    "analyze": "npx source-map-explorer \"dist/**/*.js\""
+    "analyze": "npx source-map-explorer \"dist/**/*.js\"",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "browserslist": [
     "last 4 version",
@@ -65,7 +67,8 @@
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1",
     "webpack-merge": "^4.2.2",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "^3.0.0",
+    "snyk": "^1.318.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -111,5 +114,6 @@
     "stylelint-config-standard": "^18.3.0",
     "stylelint-scss": "^3.11.1",
     "stylelint-webpack-plugin": "^0.10.5"
-  }
+  },
+  "snyk": true
 }
